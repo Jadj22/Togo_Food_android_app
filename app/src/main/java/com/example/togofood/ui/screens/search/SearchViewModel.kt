@@ -48,7 +48,9 @@ data class SearchUiState(
     val countPopular: Int = 0,
     val countNearby: Int = 0,
     val isLoading: Boolean = false,
-    val showFiltersSheet: Boolean = false
+    val showFiltersSheet: Boolean = false,
+    val recentPreparations: List<Preparation> = emptyList(),
+    val error: String? = null
 ) {
     val hasQuickFilter: Boolean
         get() = filterOpenNow || filterPopular || filterNearby
@@ -200,6 +202,7 @@ class SearchViewModel : ViewModel() {
                         results = emptyList(),
                         sellerResults = emptyList(),
                         isLoading = false,
+                        error = null,
                         countOpen = countOpen(basePreps, baseSellers),
                         countPopular = countPopular(basePreps, baseSellers),
                         countNearby = countNearby(basePreps, baseSellers)
@@ -209,37 +212,47 @@ class SearchViewModel : ViewModel() {
             }
 
             if (showLoading) {
-                _state.update { it.copy(isLoading = true) }
+                _state.update { it.copy(isLoading = true, error = null) }
                 delay(400)
             }
 
-            val (preps, sellers) = resolve(
-                query = s.query,
-                openNow = s.filterOpenNow,
-                popular = s.filterPopular,
-                nearby = s.filterNearby,
-                maxPrice = s.filterMaxPrice,
-                minRating = s.filterMinRating
-            )
-
-            val (basePreps, baseSellers) = resolve(
-                query = s.query,
-                openNow = false,
-                popular = false,
-                nearby = false,
-                maxPrice = s.filterMaxPrice,
-                minRating = s.filterMinRating
-            )
-
-            _state.update {
-                it.copy(
-                    results = preps,
-                    sellerResults = sellers,
-                    isLoading = false,
-                    countOpen = countOpen(basePreps, baseSellers),
-                    countPopular = countPopular(basePreps, baseSellers),
-                    countNearby = countNearby(basePreps, baseSellers)
+            try {
+                val (preps, sellers) = resolve(
+                    query = s.query,
+                    openNow = s.filterOpenNow,
+                    popular = s.filterPopular,
+                    nearby = s.filterNearby,
+                    maxPrice = s.filterMaxPrice,
+                    minRating = s.filterMinRating
                 )
+
+                val (basePreps, baseSellers) = resolve(
+                    query = s.query,
+                    openNow = false,
+                    popular = false,
+                    nearby = false,
+                    maxPrice = s.filterMaxPrice,
+                    minRating = s.filterMinRating
+                )
+
+                _state.update {
+                    it.copy(
+                        results = preps,
+                        sellerResults = sellers,
+                        isLoading = false,
+                        error = null,
+                        countOpen = countOpen(basePreps, baseSellers),
+                        countPopular = countPopular(basePreps, baseSellers),
+                        countNearby = countNearby(basePreps, baseSellers)
+                    )
+                }
+            } catch (e: Exception) {
+                _state.update {
+                    it.copy(
+                        isLoading = false,
+                        error = e.localizedMessage ?: "Erreur inconnue"
+                    )
+                }
             }
         }
     }

@@ -16,6 +16,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -27,18 +28,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.togofood.R
 import com.example.togofood.ui.components.PrimaryButton
+import com.example.togofood.ui.theme.Dimens
 import com.example.togofood.ui.theme.TogoMotion
-
-private val Ink = Color(0xFF111111)
-private val Muted = Color(0xFF6B6B6B)
-private val SurfaceBg = Color(0xFFF5F5F5)
 
 /**
  * Sheet unique (mid→staff) : prix + note visibles ensemble,
@@ -63,40 +60,40 @@ fun SearchFiltersSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
-        containerColor = Color.White,
-        shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
+        containerColor = MaterialTheme.colorScheme.surface,
+        shape = RoundedCornerShape(topStart = Dimens.SheetTopRadius, topEnd = Dimens.SheetTopRadius)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = 20.dp)
-                .padding(bottom = 28.dp)
+                .padding(horizontal = Dimens.SpacingXXHuge)
+                .padding(bottom = Dimens.SpacingXXHuge)
         ) {
             Text(
                 text = stringResource(R.string.search_filters_title),
-                fontSize = 20.sp,
+                fontSize = Dimens.TextSizeTitle,
                 fontWeight = FontWeight.ExtraBold,
-                color = Ink
+                color = MaterialTheme.colorScheme.onSurface
             )
-            Spacer(Modifier.height(4.dp))
+            Spacer(Modifier.height(Dimens.SpacingXs))
             Text(
                 text = stringResource(R.string.search_filters_subtitle),
-                fontSize = 14.sp,
-                color = Muted
+                fontSize = Dimens.TextSizeMd,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
-            Spacer(Modifier.height(24.dp))
+            Spacer(Modifier.height(Dimens.SpacingXXHuge))
             Text(
                 text = stringResource(R.string.search_filters_price_section),
-                fontSize = 14.sp,
+                fontSize = Dimens.TextSizeMd,
                 fontWeight = FontWeight.Bold,
-                color = Ink
+                color = MaterialTheme.colorScheme.onSurface
             )
-            Spacer(Modifier.height(10.dp))
+            Spacer(Modifier.height(Dimens.SpacingXl))
             FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(Dimens.SpacingMd),
+                verticalArrangement = Arrangement.spacedBy(Dimens.SpacingMd)
             ) {
                 OptionChip(
                     label = stringResource(R.string.search_price_any),
@@ -112,17 +109,17 @@ fun SearchFiltersSheet(
                 }
             }
 
-            Spacer(Modifier.height(22.dp))
+            Spacer(Modifier.height(Dimens.SpacingXHuge))
             Text(
                 text = stringResource(R.string.search_filters_rating_section),
-                fontSize = 14.sp,
+                fontSize = Dimens.TextSizeMd,
                 fontWeight = FontWeight.Bold,
-                color = Ink
+                color = MaterialTheme.colorScheme.onSurface
             )
-            Spacer(Modifier.height(10.dp))
+            Spacer(Modifier.height(Dimens.SpacingXl))
             FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(Dimens.SpacingMd),
+                verticalArrangement = Arrangement.spacedBy(Dimens.SpacingMd)
             ) {
                 OptionChip(
                     label = stringResource(R.string.search_rating_any),
@@ -141,7 +138,7 @@ fun SearchFiltersSheet(
                 )
             }
 
-            Spacer(Modifier.height(28.dp))
+            Spacer(Modifier.height(Dimens.SpacingXXHuge))
             PrimaryButton(
                 label = stringResource(R.string.search_filters_cta, liveCount),
                 onClick = { onApply(draftMaxPrice, draftMinRating) }
@@ -157,27 +154,27 @@ private fun OptionChip(
     onClick: () -> Unit
 ) {
     val bg by animateColorAsState(
-        targetValue = if (selected) Ink else SurfaceBg,
+        targetValue = if (selected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.surfaceContainerHighest,
         animationSpec = TogoMotion.tweenNormal(),
         label = "optBg"
     )
     val fg by animateColorAsState(
-        targetValue = if (selected) Color.White else Ink,
+        targetValue = if (selected) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.onSurface,
         animationSpec = TogoMotion.tweenNormal(),
         label = "optFg"
     )
     Box(
         modifier = Modifier
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(Dimens.RadiusXLarge))
             .background(bg)
             .clickable(onClick = onClick)
-            .padding(horizontal = 14.dp, vertical = 10.dp),
+            .padding(horizontal = Dimens.SpacingXxl, vertical = Dimens.SpacingLg),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = label,
             color = fg,
-            fontSize = 13.sp,
+            fontSize = Dimens.TextSizeSm,
             fontWeight = FontWeight.Bold
         )
     }
