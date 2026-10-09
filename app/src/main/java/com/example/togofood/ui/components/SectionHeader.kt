@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,13 +35,13 @@ fun SectionHeader(
             text = title,
             fontSize = 17.sp,
             fontWeight = FontWeight.ExtraBold,
-            color = Color(0xFF111111)
+            color = MaterialTheme.colorScheme.onSurface
         )
         if (onSeeAll != null) {
             Text(
                 text = stringResource(R.string.home_see_all),
                 fontSize = 13.sp,
-                color = Color(0xFF888888),
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontWeight = FontWeight.Medium,
                 modifier = Modifier.clickable { onSeeAll() }
             )

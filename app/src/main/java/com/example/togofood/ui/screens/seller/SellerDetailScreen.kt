@@ -59,7 +59,7 @@ import com.example.togofood.domain.model.Preparation
 import com.example.togofood.domain.model.Seller
 import com.example.togofood.domain.model.SellerOpenStatus
 import com.example.togofood.domain.model.SellerScheduleResolver
-import com.example.togofood.ui.components.BrandOrange
+import androidx.compose.material3.MaterialTheme
 import com.example.togofood.ui.components.FoodIcons
 import com.example.togofood.ui.components.PreparationCard
 import com.example.togofood.ui.components.PreparationCardSkeleton
@@ -73,10 +73,6 @@ import com.example.togofood.ui.theme.togoEnter
 private const val TAB_MENU = 0
 private const val TAB_POPULAR = 1
 
-private val PageBg = Color.White
-private val TextPrimary = Color(0xFF111111)
-private val TextSecondary = Color(0xFF666666)
-private val SurfaceBg = Color(0xFFF5F5F5)
 private val OrangeStrong = Color(0xFFC2410C)
 private val PageHPadding = 16.dp
 private val MinTouch = 48.dp
@@ -114,7 +110,7 @@ fun SellerDetailScreen(
     val popular = remember(menu) { menu.filter { it.isPopular }.ifEmpty { menu.take(3) } }
     var selectedTab by remember { mutableIntStateOf(TAB_MENU) }
 
-    Box(Modifier.fillMaxSize().background(PageBg)) {
+    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         LazyColumn(
             state = listState,
             modifier = Modifier.fillMaxSize(),
@@ -157,7 +153,7 @@ fun SellerDetailScreen(
                         Text(
                             text = s.description,
                             fontSize = 15.sp,
-                            color = TextSecondary,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             lineHeight = 22.sp,
                             modifier = Modifier.padding(horizontal = PageHPadding)
                         )
@@ -205,7 +201,7 @@ fun SellerDetailScreen(
                         if (itemsForTab.isEmpty()) {
                             Text(
                                 text = stringResource(R.string.seller_tab_empty),
-                                color = TextSecondary,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 fontSize = 14.sp,
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier
@@ -268,7 +264,7 @@ private fun PrepGrid(
 
 @Composable
 private fun SellerLoading(onBackClick: () -> Unit) {
-    Box(Modifier.fillMaxSize().background(PageBg)) {
+    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         Column(Modifier.fillMaxSize().padding(PageHPadding)) {
             Spacer(Modifier.height(48.dp))
             Box(
@@ -293,18 +289,18 @@ private fun SellerLoading(onBackClick: () -> Unit) {
 
 @Composable
 private fun SellerNotFound(onBackClick: () -> Unit) {
-    Box(Modifier.fillMaxSize().background(PageBg), contentAlignment = Alignment.Center) {
+    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 stringResource(R.string.seller_not_found),
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 18.sp,
-                color = TextPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(Modifier.height(16.dp))
             Text(
                 stringResource(R.string.cd_back),
-                color = BrandOrange,
+                color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.clickable(onClick = onBackClick)
             )
@@ -345,7 +341,7 @@ private fun TopFloatingBar(
                     fontSize = 16.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    color = TextPrimary,
+                    color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.padding(horizontal = 12.dp)
                 )
             }
@@ -370,7 +366,7 @@ private fun SellerHero(
         label = "sellerHeart"
     )
     val heartColor by animateColorAsState(
-        if (isFavorite) Color(0xFFD32F2F) else TextPrimary,
+        if (isFavorite) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface,
         TogoMotion.tweenNormal(),
         label = "sellerHeartColor"
     )
@@ -392,7 +388,7 @@ private fun SellerHero(
             Icon(
                 Icons.Default.Person,
                 contentDescription = null,
-                tint = TextSecondary.copy(alpha = 0.35f),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.35f),
                 modifier = Modifier.size(88.dp)
             )
         }
@@ -445,14 +441,14 @@ private fun SellerHoursBlock(s: Seller) {
             Text(
                 stringResource(R.string.seller_detail_hours_empty),
                 fontSize = 14.sp,
-                color = TextSecondary
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         } else {
             lines.forEach { line ->
                 Text(
                     line,
                     fontSize = 14.sp,
-                    color = TextSecondary,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     lineHeight = 20.sp
                 )
             }
@@ -472,14 +468,14 @@ private fun SellerIdentity(s: Seller) {
             s.name,
             fontSize = 24.sp,
             fontWeight = FontWeight.ExtraBold,
-            color = TextPrimary,
+            color = MaterialTheme.colorScheme.onSurface,
             lineHeight = 28.sp
         )
         Spacer(Modifier.height(4.dp))
         Text(
             stringResource(R.string.seller_zone_landmark, s.zone, s.landmark),
             fontSize = 14.sp,
-            color = TextSecondary
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Spacer(Modifier.height(12.dp))
         Row(
@@ -491,8 +487,8 @@ private fun SellerIdentity(s: Seller) {
                 StatusChip(
                     icon = Icons.Default.Star,
                     label = stringResource(R.string.seller_pro_badge),
-                    tint = BrandOrange,
-                    bg = Color(0xFFFFEDE3)
+                    tint = MaterialTheme.colorScheme.primary,
+                    bg = MaterialTheme.colorScheme.primaryContainer
                 )
             }
             StatusChip(
@@ -502,15 +498,15 @@ private fun SellerIdentity(s: Seller) {
                     s.rating,
                     s.reviewCount
                 ),
-                tint = Color(0xFFFFC107),
-                bg = SurfaceBg
+                tint = MaterialTheme.colorScheme.tertiary,
+                bg = MaterialTheme.colorScheme.surfaceContainer
             )
             OpenStatusChip(s.SellerOpenStatus)
             StatusChip(
                 icon = Icons.Default.LocationOn,
                 label = s.distanceMeters.formatDistance(),
-                tint = TextSecondary,
-                bg = SurfaceBg
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                bg = MaterialTheme.colorScheme.surfaceContainer
             )
         }
         Spacer(Modifier.height(20.dp))
@@ -520,14 +516,14 @@ private fun SellerIdentity(s: Seller) {
 @Composable
 private fun OpenStatusChip(status: SellerOpenStatus) {
     val (labelRes, color) = when (status) {
-        SellerOpenStatus.OPEN -> R.string.seller_open to Color(0xFF2F9E44)
-        SellerOpenStatus.CLOSED -> R.string.seller_closed to Color(0xFF6C757D)
-        SellerOpenStatus.OPENING_SOON -> R.string.seller_opening_soon to Color(0xFFF08C00)
+        SellerOpenStatus.OPEN -> R.string.seller_open to Color(0xFF2E7D32)
+        SellerOpenStatus.CLOSED -> R.string.seller_closed to MaterialTheme.colorScheme.onSurfaceVariant
+        SellerOpenStatus.OPENING_SOON -> R.string.seller_opening_soon to MaterialTheme.colorScheme.secondary
     }
     Row(
         Modifier
             .clip(RoundedCornerShape(50))
-            .background(SurfaceBg)
+            .background(MaterialTheme.colorScheme.surfaceContainer)
             .padding(horizontal = 12.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -558,7 +554,7 @@ private fun StatusChip(
     ) {
         Icon(icon, null, tint = tint, modifier = Modifier.size(14.dp))
         Spacer(Modifier.width(6.dp))
-        Text(label, fontSize = 13.sp, fontWeight = FontWeight.Medium, color = TextPrimary)
+        Text(label, fontSize = 13.sp, fontWeight = FontWeight.Medium, color = MaterialTheme.colorScheme.onSurface)
     }
 }
 
@@ -570,16 +566,16 @@ private fun LogisticsBlock(s: Seller, ctx: Context) {
             .fillMaxWidth()
             .padding(horizontal = PageHPadding)
             .clip(RoundedCornerShape(16.dp))
-            .background(SurfaceBg)
+            .background(MaterialTheme.colorScheme.surfaceContainer)
             .padding(16.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Default.LocationOn, null, tint = BrandOrange, modifier = Modifier.size(18.dp))
+            Icon(Icons.Default.LocationOn, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(18.dp))
             Spacer(Modifier.width(8.dp))
             Text(
                 stringResource(R.string.seller_zone_landmark, s.zone, s.landmark),
                 fontSize = 14.sp,
-                color = TextSecondary,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.weight(1f)
             )
         }
@@ -613,17 +609,17 @@ private fun LogisticsAction(
         modifier
             .heightIn(min = MinTouch)
             .clip(RoundedCornerShape(50))
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.surface)
             .clickable(onClick = onClick)
             .padding(horizontal = 14.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
         if (icon != null) {
-            Icon(icon, null, tint = OrangeStrong, modifier = Modifier.size(18.dp))
+            Icon(icon, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(18.dp))
             Spacer(Modifier.width(6.dp))
         }
-        Text(label, color = OrangeStrong, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+        Text(label, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold, fontSize = 14.sp)
     }
 }
 
@@ -632,9 +628,9 @@ private fun CircleBtn(
     icon: ImageVector,
     contentDescription: String,
     onClick: () -> Unit,
-    tint: Color = TextPrimary,
+    tint: Color = MaterialTheme.colorScheme.onSurface,
     modifier: Modifier = Modifier,
-    background: Color = Color.White.copy(alpha = 0.9f)
+    background: Color = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
 ) {
     Box(
         modifier

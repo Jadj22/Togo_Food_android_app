@@ -49,12 +49,8 @@ import com.example.togofood.domain.model.Category
 import com.example.togofood.ui.screens.home.HomeFilter
 import com.example.togofood.ui.screens.home.HomeFilterCounts
 import com.example.togofood.ui.theme.TogoMotion
+import androidx.compose.material3.MaterialTheme
 
-private val TextPrimary = Color(0xFF111111)
-private val TextSecondary = Color(0xFF666666)
-private val Outline = Color(0xFFE0E0E0)
-private val ChipBg = Color(0xFFF5F5F5)
-private val SoftMuted = Color(0xFF8A8A8A)
 private val Radius = 14.dp
 
 // ───────────────────────── Catégories calmes (ne volent pas les plats) ─────────────────────────
@@ -74,12 +70,12 @@ fun HomeCategoryRow(
             val isSelected = selected?.id == cat.id
             val pastel = FoodIcons.pastelBackgrounds[cat.id] ?: FoodIcons.defaultPastel
             val borderColor by animateColorAsState(
-                if (isSelected) BrandOrange else Color.Transparent,
+                if (isSelected) MaterialTheme.colorScheme.primary else Color.Transparent,
                 TogoMotion.tweenNormal(),
                 label = "catBorder"
             )
             val bg by animateColorAsState(
-                if (isSelected) pastel else ChipBg,
+                if (isSelected) pastel else MaterialTheme.colorScheme.surfaceContainerHighest,
                 TogoMotion.tweenNormal(),
                 label = "catBg"
             )
@@ -112,7 +108,7 @@ fun HomeCategoryRow(
                     cat.label,
                     fontSize = 11.sp,
                     fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                    color = if (isSelected) TextPrimary else SoftMuted,
+                    color = if (isSelected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Center
@@ -149,12 +145,12 @@ fun HomeFilterChips(
             }
 
             val bgColor by animateColorAsState(
-                if (isOn) TextPrimary else ChipBg,
+                if (isOn) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.surfaceContainerHighest,
                 TogoMotion.tweenNormal(),
                 label = "filterBg"
             )
             val textColor by animateColorAsState(
-                if (isOn) Color.White else TextPrimary,
+                if (isOn) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.onSurface,
                 TogoMotion.tweenNormal(),
                 label = "filterText"
             )
@@ -186,7 +182,7 @@ fun HomeResultsBar(count: Int, onReset: () -> Unit) {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
+Text(
             text = when (count) {
                 0 -> stringResource(R.string.home_results_none)
                 1 -> stringResource(R.string.home_results_one)
@@ -194,22 +190,22 @@ fun HomeResultsBar(count: Int, onReset: () -> Unit) {
             },
             fontSize = 17.sp,
             fontWeight = FontWeight.ExtraBold,
-            color = TextPrimary
+            color = MaterialTheme.colorScheme.onSurface
         )
         Box(
             Modifier
-                .heightIn(min = 40.dp)
-                .clip(RoundedCornerShape(Radius))
-                .background(ChipBg)
-                .clickable(role = Role.Button, onClick = onReset)
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+                    .heightIn(min = 40.dp)
+                    .clip(RoundedCornerShape(Radius))
+                    .background(MaterialTheme.colorScheme.surfaceContainerHighest)
+                    .clickable(role = Role.Button, onClick = onReset)
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
             contentAlignment = Alignment.Center
         ) {
             Text(
                 stringResource(R.string.home_reset_filters),
                 fontSize = 13.sp,
                 fontWeight = FontWeight.Bold,
-                color = TextPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }
@@ -227,13 +223,13 @@ fun HomeEmptyResults() {
             stringResource(R.string.home_empty_title),
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp,
-            color = TextPrimary
+            color = MaterialTheme.colorScheme.onSurface
         )
         Spacer(Modifier.size(2.dp))
         Text(
             stringResource(R.string.home_empty_subtitle),
             fontSize = 14.sp,
-            color = TextSecondary,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
     }
@@ -264,7 +260,7 @@ fun HomePriceRangeBottomSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
-        containerColor = Color.White,
+        containerColor = MaterialTheme.colorScheme.surface,
         shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
     ) {
         Column(
@@ -278,13 +274,13 @@ fun HomePriceRangeBottomSheet(
                 stringResource(R.string.home_price_sheet_title),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.ExtraBold,
-                color = TextPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(Modifier.height(4.dp))
             Text(
                 stringResource(R.string.home_price_sheet_subtitle),
                 fontSize = 14.sp,
-                color = TextSecondary
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Spacer(Modifier.height(20.dp))
             FlowRow(
@@ -320,12 +316,12 @@ private fun PriceChip(
     onClick: () -> Unit
 ) {
     val bg by animateColorAsState(
-        if (selected) TextPrimary else ChipBg,
+        if (selected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.surfaceContainerHighest,
         TogoMotion.tweenNormal(),
         label = "priceChipBg"
     )
     val fg by animateColorAsState(
-        if (selected) Color.White else TextPrimary,
+        if (selected) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.onSurface,
         TogoMotion.tweenNormal(),
         label = "priceChipFg"
     )
@@ -333,7 +329,7 @@ private fun PriceChip(
         Modifier
             .clip(RoundedCornerShape(Radius))
             .background(bg)
-            .border(1.dp, if (selected) TextPrimary else Outline, RoundedCornerShape(Radius))
+            .border(1.dp, if (selected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.outlineVariant, RoundedCornerShape(Radius))
             .clickable(onClick = onClick)
             .padding(horizontal = 14.dp, vertical = 10.dp)
     ) {

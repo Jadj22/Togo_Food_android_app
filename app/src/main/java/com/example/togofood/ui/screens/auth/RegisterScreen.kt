@@ -54,14 +54,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.togofood.R
 import com.example.togofood.domain.model.SellerScheduleResolver
 import com.example.togofood.domain.model.UserRole
-import com.example.togofood.ui.components.BrandOrange
+import androidx.compose.material3.MaterialTheme
 import com.example.togofood.ui.components.LabeledTextField
 import com.example.togofood.ui.components.PhoneTextField
 import com.example.togofood.ui.components.PrimaryButton
 import com.example.togofood.ui.theme.TogoMotion
 import com.example.togofood.ui.theme.togoEnter
 
-private val BrandOrangeLight = Color(0xFFFBE9E7)
 private val BorderGrey = Color(0xFFE0E0E0)
 
 @SuppressLint("UnusedCrossfadeTargetStateParameter")
@@ -378,12 +377,12 @@ private fun RoleCard(
     modifier: Modifier = Modifier
 ) {
     val bgColor by animateColorAsState(
-        if (selected) BrandOrangeLight else Color.White,
+        if (selected) MaterialTheme.colorScheme.primaryContainer else Color.White,
         TogoMotion.tweenNormal(),
         label = "roleBg"
     )
     val borderColor by animateColorAsState(
-        if (selected) BrandOrange else BorderGrey,
+        if (selected) MaterialTheme.colorScheme.primary else BorderGrey,
         TogoMotion.tweenNormal(),
         label = "roleBorder"
     )
@@ -431,12 +430,12 @@ private fun RegisterTopBar(stepLabel: String, onBack: () -> Unit) {
         Box(
             modifier = Modifier
                 .clip(RoundedCornerShape(12.dp))
-                .background(BrandOrangeLight)
+                .background(MaterialTheme.colorScheme.primaryContainer)
                 .padding(horizontal = 12.dp, vertical = 6.dp)
         ) {
             Text(
                 text = stepLabel,
-                color = BrandOrange,
+                color = MaterialTheme.colorScheme.primary,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Black
             )
@@ -467,7 +466,7 @@ private fun TermsCheckbox(checked: Boolean, onCheckedChange: (Boolean) -> Unit) 
         Checkbox(
             checked = checked,
             onCheckedChange = onCheckedChange,
-            colors = CheckboxDefaults.colors(checkedColor = BrandOrange)
+            colors = CheckboxDefaults.colors(checkedColor = MaterialTheme.colorScheme.primary)
         )
         Text(
             text = stringResource(R.string.terms_accept),

@@ -16,6 +16,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -28,8 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.togofood.ui.theme.TogoMotion
 
-val BrandOrange = Color(0xFFE65100)
-val LightGrey = Color(0xFFE0E0E0)
+private val LightGrey = Color(0xFFE0E0E0)
 
 @Composable
 fun PrimaryButton(
@@ -55,21 +55,21 @@ fun PrimaryButton(
             .graphicsLayer { scaleX = scale; scaleY = scale },
         shape = RoundedCornerShape(27.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = BrandOrange,
-            disabledContainerColor = BrandOrange.copy(alpha = 0.4f)
+            containerColor = MaterialTheme.colorScheme.primary,
+            disabledContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.4f)
         ),
         interactionSource = interactionSource
     ) {
         if (isLoading) {
             CircularProgressIndicator(
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier.size(24.dp),
                 strokeWidth = 2.5.dp
             )
         } else {
             Text(
                 text = label,
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onPrimary,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )

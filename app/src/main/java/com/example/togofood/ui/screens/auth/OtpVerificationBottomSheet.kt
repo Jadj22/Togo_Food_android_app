@@ -48,7 +48,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.togofood.R
-import com.example.togofood.ui.components.BrandOrange
+import androidx.compose.material3.MaterialTheme
 import com.example.togofood.ui.components.PrimaryButton
 import kotlinx.coroutines.delay
 import kotlin.math.roundToInt
@@ -128,7 +128,7 @@ fun OtpVerificationBottomSheet(
                 text = phoneNumber,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
-                color = BrandOrange
+                color = MaterialTheme.colorScheme.primary
             )
             Spacer(modifier = Modifier.height(32.dp))
             
@@ -190,7 +190,7 @@ private fun OtpHeaderIcon() {
         Icon(
             painter = painterResource(id = R.drawable.ic_otp_phone),
             contentDescription = null,
-            tint = BrandOrange,
+            tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(30.dp)
         )
     }
@@ -248,8 +248,8 @@ private fun OtpDigitBox(
 ) {
     val borderColor = when {
         hasError -> Color.Red
-        isActive -> BrandOrange
-        isFilled -> BrandOrange.copy(alpha = 0.5f)
+        isActive -> MaterialTheme.colorScheme.primary
+        isFilled -> MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
         else     -> Color(0xFFE0E0E0)
     }
 
@@ -279,14 +279,14 @@ private fun ResendCodeRow(secondsLeft: Int, onResend: () -> Unit) {
                 text = formatted,
                 fontSize = 13.sp,
                 fontWeight = FontWeight.Bold,
-                color = BrandOrange
+                color = MaterialTheme.colorScheme.primary
             )
         }
     } else {
         TextButton(onClick = onResend) {
             Text(
                 text = stringResource(R.string.resend_code_button),
-                color = BrandOrange,
+                color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Bold,
                 fontSize = 13.sp
             )

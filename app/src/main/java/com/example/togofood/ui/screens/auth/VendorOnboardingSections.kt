@@ -56,7 +56,7 @@ import androidx.compose.ui.unit.sp
 import com.example.togofood.R
 import com.example.togofood.domain.model.Category
 import com.example.togofood.domain.model.DaySchedule
-import com.example.togofood.ui.components.BrandOrange
+import androidx.compose.material3.MaterialTheme
 import com.example.togofood.ui.components.LabeledTextField
 import com.example.togofood.ui.components.PhoneTextField
 import com.example.togofood.ui.theme.TogoMotion
@@ -108,7 +108,7 @@ fun VendorStepProgress(current: Int, total: Int = VendorOnboarding.TOTAL_STEPS) 
                             .clip(RoundedCornerShape(3.dp))
                             .background(
                                 Brush.horizontalGradient(
-                                    listOf(BrandOrange, Color(0xFFFF8A50))
+                                    listOf(MaterialTheme.colorScheme.primary, Color(0xFFFF8A50))
                                 )
                             )
                     )
@@ -128,7 +128,7 @@ fun VendorStepProgress(current: Int, total: Int = VendorOnboarding.TOTAL_STEPS) 
                 stringResource(R.string.vendor_onboarding_step_of, step, total),
                 fontSize = 12.sp,
                 fontWeight = FontWeight.SemiBold,
-                color = BrandOrange
+                color = MaterialTheme.colorScheme.primary
             )
         }
     }
@@ -207,7 +207,7 @@ fun MotivAutoCarousel(
                     label = "dotW$i"
                 )
                 val c by animateColorAsState(
-                    if (selected) BrandOrange else Color(0xFFD0D0D0),
+                    if (selected) MaterialTheme.colorScheme.primary else Color(0xFFD0D0D0),
                     TogoMotion.tweenFast(),
                     label = "dotC$i"
                 )
@@ -230,7 +230,7 @@ fun VendorTipCard(text: String, emoji: String = "💡") {
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
-            .background(BrandOrangeLight)
+            .background(MaterialTheme.colorScheme.primaryContainer)
             .padding(12.dp)
             .togoEnter(),
         verticalAlignment = Alignment.Top
@@ -240,7 +240,7 @@ fun VendorTipCard(text: String, emoji: String = "💡") {
         Text(
             text = text,
             fontSize = 13.sp,
-            color = BrandOrange,
+            color = MaterialTheme.colorScheme.primary,
             lineHeight = 18.sp,
             fontWeight = FontWeight.Medium,
             modifier = Modifier.weight(1f)
@@ -351,7 +351,7 @@ fun VendorShopStep(
             categories.forEach { cat ->
                 val selected = cat.id == categoryId
                 val bg by animateColorAsState(
-                    if (selected) BrandOrange.copy(alpha = 0.14f) else SurfaceBg,
+                    if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.14f) else SurfaceBg,
                     TogoMotion.tweenFast(),
                     label = "catBg${cat.id}"
                 )
@@ -360,7 +360,7 @@ fun VendorShopStep(
                         .clip(RoundedCornerShape(20.dp))
                         .background(bg)
                         .then(
-                            if (selected) Modifier.border(1.5.dp, BrandOrange, RoundedCornerShape(20.dp))
+                            if (selected) Modifier.border(1.5.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(20.dp))
                             else Modifier
                         )
                         .clickable { onCategoryChange(cat.id) }
@@ -374,7 +374,7 @@ fun VendorShopStep(
                         cat.label,
                         fontSize = 13.sp,
                         fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
-                        color = if (selected) BrandOrange else TextPrimary
+                        color = if (selected) MaterialTheme.colorScheme.primary else TextPrimary
                     )
                 }
             }
@@ -583,7 +583,7 @@ fun VendorReviewStep(
                 .background(
                     Brush.verticalGradient(listOf(HeroPastel, Color.White))
                 )
-                .border(1.dp, BrandOrange.copy(alpha = 0.18f), RoundedCornerShape(20.dp))
+                .border(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.18f), RoundedCornerShape(20.dp))
                 .padding(16.dp)
         ) {
             Column {
@@ -598,14 +598,14 @@ fun VendorReviewStep(
                         Box(
                             modifier = Modifier
                                 .clip(RoundedCornerShape(8.dp))
-                                .background(BrandOrange.copy(alpha = 0.12f))
+                                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.12f))
                                 .padding(horizontal = 8.dp, vertical = 3.dp)
                         ) {
                             Text(
                                 stringResource(R.string.vendor_onboarding_review_preview_badge),
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = BrandOrange
+                                color = MaterialTheme.colorScheme.primary
                             )
                         }
                         Spacer(Modifier.height(6.dp))
@@ -734,7 +734,7 @@ fun VendorReviewStep(
         Spacer(Modifier.height(14.dp))
 
         val termsBg by animateColorAsState(
-            if (acceptTerms) BrandOrangeLight else SurfaceBg,
+            if (acceptTerms) MaterialTheme.colorScheme.primaryContainer else SurfaceBg,
             TogoMotion.tweenNormal(),
             label = "termsBg"
         )
@@ -745,7 +745,7 @@ fun VendorReviewStep(
                 .background(termsBg)
                 .border(
                     width = if (acceptTerms) 1.5.dp else 0.dp,
-                    color = if (acceptTerms) BrandOrange else Color.Transparent,
+                    color = if (acceptTerms) MaterialTheme.colorScheme.primary else Color.Transparent,
                     shape = RoundedCornerShape(14.dp)
                 )
                 .clickable { onAcceptTerms(!acceptTerms) }
@@ -757,10 +757,10 @@ fun VendorReviewStep(
                 modifier = Modifier
                     .size(24.dp)
                     .clip(RoundedCornerShape(7.dp))
-                    .background(if (acceptTerms) BrandOrange else Color.White)
+                    .background(if (acceptTerms) MaterialTheme.colorScheme.primary else Color.White)
                     .border(
                         1.5.dp,
-                        if (acceptTerms) BrandOrange else Color(0xFFBDBDBD),
+                        if (acceptTerms) MaterialTheme.colorScheme.primary else Color(0xFFBDBDBD),
                         RoundedCornerShape(7.dp)
                     ),
                 contentAlignment = Alignment.Center
@@ -834,14 +834,14 @@ private fun SummaryCard(
             modifier = Modifier
                 .size(40.dp)
                 .clip(CircleShape)
-                .background(BrandOrangeLight),
+                .background(MaterialTheme.colorScheme.primaryContainer),
             contentAlignment = Alignment.Center
         ) {
             Text(emoji, fontSize = 18.sp)
         }
         Spacer(Modifier.width(12.dp))
         Column(modifier = Modifier.weight(1f)) {
-            Text(title, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = BrandOrange)
+            Text(title, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = MaterialTheme.colorScheme.primary)
             Spacer(Modifier.height(4.dp))
             lines.filter { it.isNotBlank() }.take(3).forEach { line ->
                 Text(
@@ -863,11 +863,11 @@ private fun PresetChip(label: String, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(20.dp))
-            .background(BrandOrangeLight)
+            .background(MaterialTheme.colorScheme.primaryContainer)
             .clickable(onClick = onClick)
             .padding(horizontal = 14.dp, vertical = 8.dp)
     ) {
-        Text(label, fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = BrandOrange)
+        Text(label, fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
     }
 }
 
@@ -882,7 +882,7 @@ private fun HourControl(
         Text(label, fontSize = 11.sp, color = TextSecondary)
         Row(verticalAlignment = Alignment.CenterVertically) {
             TextButton(onClick = onMinus) {
-                Text("−", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = BrandOrange)
+                Text("−", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
             }
             AnimatedContent(
                 targetState = hour,
@@ -901,7 +901,7 @@ private fun HourControl(
                 )
             }
             TextButton(onClick = onPlus) {
-                Text("+", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = BrandOrange)
+                Text("+", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
             }
         }
     }
@@ -910,7 +910,7 @@ private fun HourControl(
 @Composable
 private fun DayToggle(label: String, open: Boolean, onClick: () -> Unit) {
     val bg by animateColorAsState(
-        if (open) BrandOrange else SurfaceBg,
+        if (open) MaterialTheme.colorScheme.primary else SurfaceBg,
         TogoMotion.tweenFast(),
         label = "dayBg$label"
     )

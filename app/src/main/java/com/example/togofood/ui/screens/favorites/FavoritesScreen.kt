@@ -59,18 +59,15 @@ import com.example.togofood.R
 import com.example.togofood.domain.model.Preparation
 import com.example.togofood.domain.model.Seller
 import com.example.togofood.domain.model.SellerOpenStatus
-import com.example.togofood.ui.components.BrandOrange
+import androidx.compose.material3.MaterialTheme
 import com.example.togofood.ui.components.PreparationCard
 import com.example.togofood.ui.components.UnderlineTabs
 import com.example.togofood.ui.components.formatDistance
+import com.example.togofood.ui.theme.LocalPriceGreen
 import com.example.togofood.ui.theme.TogoMotion
 import com.example.togofood.ui.theme.togoEnter
 
-private val Ink = Color(0xFF111111)
-private val Muted = Color(0xFF666666)
-private val SoftCream = Color(0xFFFFF8F3)
 private val OrangeTint = Color(0xFFFFEDE3)
-private val OpenGreen = Color(0xFF2E7D32)
 
 @Composable
 fun FavoritesScreen(
@@ -119,7 +116,7 @@ private fun FavoritesContent(
     Column(
         Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.background)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
         FavoritesHeader(
@@ -178,7 +175,7 @@ private fun FavoritesHeader(
             .fillMaxWidth()
             .background(
                 Brush.verticalGradient(
-                    colors = listOf(SoftCream, Color.White)
+                    colors = listOf(MaterialTheme.colorScheme.surfaceContainer, MaterialTheme.colorScheme.surface)
                 )
             )
             .padding(start = 16.dp, end = 16.dp, top = 20.dp, bottom = 8.dp)
@@ -188,13 +185,13 @@ private fun FavoritesHeader(
             text = stringResource(R.string.favorites_title),
             fontSize = 26.sp,
             fontWeight = FontWeight.ExtraBold,
-            color = Ink
+            color = MaterialTheme.colorScheme.onSurface
         )
         Spacer(Modifier.height(4.dp))
         Text(
             text = stringResource(R.string.favorites_subtitle),
             fontSize = 14.sp,
-            color = Muted,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             lineHeight = 20.sp
         )
         Spacer(Modifier.height(10.dp))
@@ -210,7 +207,7 @@ private fun FavoritesHeader(
             },
             fontSize = 13.sp,
             fontWeight = FontWeight.SemiBold,
-            color = BrandOrange
+            color = MaterialTheme.colorScheme.primary
         )
     }
 }
@@ -291,12 +288,12 @@ private fun MoodChip(
     onClick: () -> Unit
 ) {
     val bg by animateColorAsState(
-        targetValue = if (selected) Ink else SoftCream,
+        targetValue = if (selected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.surfaceContainer,
         animationSpec = TogoMotion.tweenNormal(),
         label = "moodBg"
     )
     val fg by animateColorAsState(
-        targetValue = if (selected) Color.White else Ink,
+        targetValue = if (selected) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.onSurface,
         animationSpec = TogoMotion.tweenNormal(),
         label = "moodFg"
     )
@@ -374,7 +371,7 @@ private fun SpotsPane(
                 onToggleFavorite = { onToggleSeller(seller.uuid) }
             )
             HorizontalDivider(
-                color = Color(0xFFF0F0F0),
+                color = MaterialTheme.colorScheme.outlineVariant,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
         }
@@ -394,9 +391,9 @@ private fun FavoriteSpotRow(
         SellerOpenStatus.OPENING_SOON -> stringResource(R.string.seller_opening_soon)
     }
     val statusColor = when (seller.SellerOpenStatus) {
-        SellerOpenStatus.OPEN -> OpenGreen
-        SellerOpenStatus.OPENING_SOON -> BrandOrange
-        SellerOpenStatus.CLOSED -> Muted
+        SellerOpenStatus.OPEN -> MaterialTheme.colorScheme.tertiary
+        SellerOpenStatus.OPENING_SOON -> MaterialTheme.colorScheme.primary
+        SellerOpenStatus.CLOSED -> MaterialTheme.colorScheme.onSurfaceVariant
     }
 
     Row(
@@ -410,7 +407,7 @@ private fun FavoriteSpotRow(
             modifier = Modifier
                 .size(56.dp)
                 .clip(CircleShape)
-                .background(if (isOpen) OrangeTint else Color(0xFFF0F0F0)),
+                .background(if (isOpen) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceContainer),
             contentAlignment = Alignment.Center
         ) {
             Text("🏪", fontSize = 26.sp)
@@ -424,7 +421,7 @@ private fun FavoriteSpotRow(
                     text = seller.name,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
-                    color = Ink,
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f, fill = false)
@@ -433,7 +430,7 @@ private fun FavoriteSpotRow(
                     Spacer(Modifier.width(6.dp))
                     Text(
                         text = "✓",
-                        color = BrandOrange,
+                        color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold
                     )
                 }
@@ -446,7 +443,7 @@ private fun FavoriteSpotRow(
                     seller.distanceMeters.formatDistance()
                 ),
                 fontSize = 13.sp,
-                color = Muted,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -463,7 +460,7 @@ private fun FavoriteSpotRow(
             Icon(
                 imageVector = Icons.Default.Favorite,
                 contentDescription = stringResource(R.string.cd_favorite),
-                tint = BrandOrange
+                tint = MaterialTheme.colorScheme.primary
             )
         }
     }
@@ -488,7 +485,7 @@ private fun TabEmptyState(
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = BrandOrange.copy(alpha = 0.45f),
+            tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.45f),
             modifier = Modifier.size(52.dp)
         )
         Spacer(Modifier.height(16.dp))
@@ -496,14 +493,14 @@ private fun TabEmptyState(
             text = title,
             fontSize = 17.sp,
             fontWeight = FontWeight.Bold,
-            color = Ink,
+            color = MaterialTheme.colorScheme.onSurface,
             textAlign = TextAlign.Center
         )
         Spacer(Modifier.height(8.dp))
         Text(
             text = subtitle,
             fontSize = 14.sp,
-            color = Muted,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
             lineHeight = 20.sp
         )
@@ -514,7 +511,7 @@ private fun TabEmptyState(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = BrandOrange),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                 shape = RoundedCornerShape(24.dp)
             ) {
                 Text(cta, fontWeight = FontWeight.Bold, fontSize = 15.sp)
@@ -530,7 +527,7 @@ private fun EmptyFavorites(onDiscoverClick: () -> Unit) {
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
-                    colors = listOf(SoftCream, Color.White)
+                    colors = listOf(MaterialTheme.colorScheme.surfaceContainer, MaterialTheme.colorScheme.surface)
                 )
             )
             .windowInsetsPadding(WindowInsets.statusBars)
@@ -542,7 +539,7 @@ private fun EmptyFavorites(onDiscoverClick: () -> Unit) {
         Icon(
             Icons.Default.FavoriteBorder,
             contentDescription = null,
-            tint = BrandOrange.copy(alpha = 0.5f),
+            tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
             modifier = Modifier.size(64.dp)
         )
         Spacer(Modifier.height(16.dp))
@@ -550,14 +547,14 @@ private fun EmptyFavorites(onDiscoverClick: () -> Unit) {
             stringResource(R.string.favorites_empty_title),
             fontSize = 20.sp,
             fontWeight = FontWeight.ExtraBold,
-            color = Ink,
+            color = MaterialTheme.colorScheme.onSurface,
             textAlign = TextAlign.Center
         )
         Spacer(Modifier.height(8.dp))
         Text(
             stringResource(R.string.favorites_empty_subtitle),
             fontSize = 14.sp,
-            color = Muted,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
             lineHeight = 20.sp
         )
@@ -567,7 +564,7 @@ private fun EmptyFavorites(onDiscoverClick: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = BrandOrange),
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
             shape = RoundedCornerShape(25.dp)
         ) {
             Text(

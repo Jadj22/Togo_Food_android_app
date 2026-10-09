@@ -49,7 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.togofood.R
-import com.example.togofood.ui.components.BrandOrange
+import androidx.compose.material3.MaterialTheme
 import com.example.togofood.ui.components.FoodIcons
 import com.example.togofood.ui.components.LabeledTextField
 import com.example.togofood.ui.components.PrimaryButton
@@ -205,9 +205,9 @@ fun SellerPrepEditScreen(
                     Row(
                         modifier = Modifier
                             .clip(RoundedCornerShape(20.dp))
-                            .background(if (selected) BrandOrange.copy(alpha = 0.12f) else SurfaceBg)
+                            .background(if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.12f) else SurfaceBg)
                             .then(
-                                if (selected) Modifier.border(1.dp, BrandOrange, RoundedCornerShape(20.dp))
+                                if (selected) Modifier.border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(20.dp))
                                 else Modifier
                             )
                             .clickable { viewModel.updateCategory(cat.id) }
@@ -220,7 +220,7 @@ fun SellerPrepEditScreen(
                             cat.label,
                             fontSize = 13.sp,
                             fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
-                            color = if (selected) BrandOrange else TextPrimary
+                            color = if (selected) MaterialTheme.colorScheme.primary else TextPrimary
                         )
                     }
                 }
@@ -268,11 +268,11 @@ fun SellerPrepEditScreen(
             }
 
             TextButton(onClick = viewModel::addVariant) {
-                Icon(Icons.Default.Add, contentDescription = null, tint = BrandOrange, modifier = Modifier.size(18.dp))
+                Icon(Icons.Default.Add, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(18.dp))
                 Spacer(Modifier.width(6.dp))
                 Text(
                     stringResource(R.string.seller_prep_add_variant),
-                    color = BrandOrange,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.SemiBold
                 )
             }
@@ -322,7 +322,7 @@ private fun ToggleRow(
             onCheckedChange = onCheckedChange,
             colors = SwitchDefaults.colors(
                 checkedThumbColor = Color.White,
-                checkedTrackColor = BrandOrange,
+                checkedTrackColor = MaterialTheme.colorScheme.primary,
                 uncheckedThumbColor = Color.White,
                 uncheckedTrackColor = Color(0xFFBDBDBD),
             )

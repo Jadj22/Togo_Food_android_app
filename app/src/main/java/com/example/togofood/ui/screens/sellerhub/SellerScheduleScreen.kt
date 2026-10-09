@@ -44,7 +44,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.togofood.R
 import com.example.togofood.domain.model.DaySchedule
 import com.example.togofood.domain.model.TimeSlot
-import com.example.togofood.ui.components.BrandOrange
+import androidx.compose.material3.MaterialTheme
 import com.example.togofood.ui.components.PrimaryButton
 import com.example.togofood.ui.theme.togoEnter
 import java.util.Calendar
@@ -211,7 +211,7 @@ private fun DayScheduleCard(
                 TextButton(onClick = onAddSlot) {
                     Text(
                         stringResource(R.string.seller_schedule_add_slot),
-                        color = BrandOrange,
+                        color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 13.sp
                     )
@@ -282,7 +282,7 @@ private fun HourStepper(
                 onClick = { onChange((hour - 1).coerceIn(range)) },
                 enabled = hour > range.first
             ) {
-                Text("−", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = BrandOrange)
+                Text("−", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
             }
             Text(
                 "${hour}h",
@@ -296,7 +296,7 @@ private fun HourStepper(
                 onClick = { onChange((hour + 1).coerceIn(range)) },
                 enabled = hour < range.last
             ) {
-                Text("+", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = BrandOrange)
+                Text("+", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
             }
         }
     }

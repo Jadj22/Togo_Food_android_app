@@ -55,7 +55,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.togofood.R
 import com.example.togofood.domain.model.Seller
-import com.example.togofood.ui.components.BrandOrange
+import androidx.compose.material3.MaterialTheme
 import com.example.togofood.ui.theme.TogoMotion
 import com.example.togofood.ui.theme.togoEnter
 import kotlin.math.roundToInt
@@ -163,12 +163,12 @@ fun MapMarker(seller: Seller, isSelected: Boolean, onClick: () -> Unit) {
         label = "markerSize"
     )
     val bgColor by animateColorAsState(
-        if (isSelected) BrandOrange else Color.White,
+        if (isSelected) MaterialTheme.colorScheme.primary else Color.White,
         TogoMotion.tweenNormal(),
         label = "markerBg"
     )
     val iconColor by animateColorAsState(
-        if (isSelected) Color.White else BrandOrange,
+        if (isSelected) Color.White else MaterialTheme.colorScheme.primary,
         TogoMotion.tweenNormal(),
         label = "markerIcon"
     )
@@ -269,7 +269,7 @@ fun SellerSnippetCard(seller: Seller, onClick: () -> Unit, onClose: () -> Unit) 
                 Text(text = seller.zone, color = Color.Gray, fontSize = 14.sp, fontWeight = FontWeight.Medium)
                 Spacer(modifier = Modifier.height(4.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = "⭐ ${String.format("%.1f", seller.rating)}", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = BrandOrange)
+                    Text(text = "⭐ ${String.format("%.1f", seller.rating)}", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
                     Text(text = " • ${seller.distanceMeters}m", color = Color.Gray, fontSize = 13.sp)
                 }
             }

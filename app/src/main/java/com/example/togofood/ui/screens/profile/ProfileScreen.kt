@@ -42,11 +42,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.togofood.R
 import com.example.togofood.data.repository.SessionRepository
-import com.example.togofood.ui.components.BrandOrange
+import androidx.compose.material3.MaterialTheme
 import com.example.togofood.ui.theme.togoEnter
-
-private val TextPrimary = Color(0xFF111111)
-private val TextSecondary = Color(0xFF666666)
 
 /**
  * Profil (PRD §33). Mode invité par défaut (PRD §34).
@@ -63,7 +60,7 @@ fun ProfileScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.background)
             .windowInsetsPadding(WindowInsets.statusBars)
             .verticalScroll(rememberScrollState())
     ) {
@@ -78,13 +75,13 @@ fun ProfileScreen(
                 modifier = Modifier
                     .size(64.dp)
                     .clip(CircleShape)
-                    .background(BrandOrange.copy(alpha = 0.15f)),
+                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     if (session.isVendor) Icons.Default.Home else Icons.Default.Person,
                     contentDescription = null,
-                    tint = BrandOrange,
+                    tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(32.dp)
                 )
             }
@@ -97,7 +94,7 @@ fun ProfileScreen(
                     },
                     fontWeight = FontWeight.ExtraBold,
                     fontSize = 20.sp,
-                    color = TextPrimary
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
                     when {
@@ -106,7 +103,7 @@ fun ProfileScreen(
                         else -> stringResource(R.string.profile_guest_subtitle)
                     },
                     fontSize = 13.sp,
-                    color = TextSecondary
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
@@ -123,7 +120,7 @@ fun ProfileScreen(
             ) {
                 Text(
                     stringResource(R.string.profile_login),
-                    color = BrandOrange,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold,
                     fontSize = 15.sp
                 )
@@ -161,7 +158,7 @@ fun ProfileScreen(
             ) {
                 Text(
                     stringResource(R.string.profile_logout),
-                    color = TextSecondary,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontWeight = FontWeight.Bold,
                     fontSize = 15.sp
                 )
@@ -172,7 +169,7 @@ fun ProfileScreen(
         Text(
             stringResource(R.string.profile_version),
             fontSize = 12.sp,
-            color = Color(0xFF999999),
+            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
             modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
             textAlign = TextAlign.Center
         )
@@ -185,7 +182,7 @@ private fun SectionTitle(title: String) {
         title,
         fontSize = 13.sp,
         fontWeight = FontWeight.Bold,
-        color = TextSecondary,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
         modifier = Modifier.padding(start = 16.dp, top = 8.dp, bottom = 6.dp)
     )
 }
@@ -199,15 +196,15 @@ private fun ProfileRow(icon: ImageVector, label: String, onClick: (() -> Unit)? 
             .padding(horizontal = 16.dp, vertical = 14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(icon, label, tint = TextPrimary, modifier = Modifier.size(22.dp))
+        Icon(icon, label, tint = MaterialTheme.colorScheme.onSurface, modifier = Modifier.size(22.dp))
         Spacer(Modifier.width(16.dp))
         Text(
             label,
             fontSize = 15.sp,
             fontWeight = FontWeight.Medium,
-            color = TextPrimary,
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.weight(1f)
         )
-        Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null, tint = Color(0xFFBBBBBB))
+        Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f))
     }
 }

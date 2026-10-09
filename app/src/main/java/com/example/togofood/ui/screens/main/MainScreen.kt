@@ -42,7 +42,7 @@ import androidx.navigation.navArgument
 import com.example.togofood.R
 import com.example.togofood.data.repository.FavoritesRepository
 import com.example.togofood.data.repository.SessionRepository
-import com.example.togofood.ui.components.BrandOrange
+import androidx.compose.material3.MaterialTheme
 import com.example.togofood.ui.navigation.BottomNavItem
 import com.example.togofood.ui.screens.favorites.FavoritesScreen
 import com.example.togofood.ui.screens.home.HomeScreen
@@ -60,9 +60,6 @@ import com.example.togofood.ui.theme.togoDetailEnter
 import com.example.togofood.ui.theme.togoDetailExit
 import com.example.togofood.ui.theme.togoDetailPopEnter
 import com.example.togofood.ui.theme.togoDetailPopExit
-
-private val NavSurface = Color(0xFFFAFAFA)
-private val NavHairline = Color(0xFFE8E8E8)
 
 @Composable
 fun MainScreen(
@@ -91,9 +88,9 @@ fun MainScreen(
                         Modifier
                             .fillMaxWidth()
                             .height(1.dp)
-                            .background(NavHairline)
+                            .background(MaterialTheme.colorScheme.outlineVariant)
                     )
-                    NavigationBar(containerColor = NavSurface) {
+                    NavigationBar(containerColor = MaterialTheme.colorScheme.surfaceContainer) {
                         BottomNavItem.all.forEach { item ->
                             val selected =
                                 currentDestination?.hierarchy?.any { it.route == item.route } == true
@@ -124,11 +121,11 @@ fun MainScreen(
                                     )
                                 },
                                 colors = NavigationBarItemDefaults.colors(
-                                    selectedIconColor = BrandOrange,
-                                    selectedTextColor = BrandOrange,
-                                    indicatorColor = BrandOrange.copy(alpha = 0.12f),
-                                    unselectedIconColor = Color(0xFF9E9E9E),
-                                    unselectedTextColor = Color(0xFF9E9E9E)
+                                    selectedIconColor = MaterialTheme.colorScheme.primary,
+                                    selectedTextColor = MaterialTheme.colorScheme.primary,
+                                    indicatorColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
+                                    unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             )
                         }
@@ -332,7 +329,7 @@ private fun NavIcon(
             if (favoritesCount > 0) {
                 BadgedBox(
                     badge = {
-                        Badge(containerColor = BrandOrange) {
+                        Badge(containerColor = MaterialTheme.colorScheme.primary) {
                             Text(
                                 text = if (favoritesCount > 99) "99+" else favoritesCount.toString(),
                                 fontSize = 10.sp,
@@ -355,7 +352,7 @@ private fun NavIcon(
                             modifier = Modifier
                                 .size(8.dp)
                                 .clip(CircleShape)
-                                .background(BrandOrange)
+                                .background(MaterialTheme.colorScheme.primary)
                         )
                     }
                 ) {

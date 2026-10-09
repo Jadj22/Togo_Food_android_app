@@ -32,11 +32,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.togofood.R
 import com.example.togofood.domain.model.Preparation
+import com.example.togofood.ui.theme.LocalPriceGreen
 
 private val Ink = Color(0xFF111111)
 private val Muted = Color(0xFF6B6B6B)
 private val SoftMuted = Color(0xFF8A8A8A)
-private val PriceGreen = Color(0xFF2E7D32)
 private val StarGold = Color(0xFFF08C00)
 private val ImageBg = Color(0xFFF5F5F5)
 
@@ -150,7 +150,7 @@ fun MenuItemRow(
                         }
                         withStyle(
                             SpanStyle(
-                                color = PriceGreen,
+                                color = LocalPriceGreen.current,
                                 fontWeight = FontWeight.ExtraBold
                             )
                         ) {

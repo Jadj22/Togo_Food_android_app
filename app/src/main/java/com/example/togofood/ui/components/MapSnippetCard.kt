@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material3.MaterialTheme
 
 @Composable
 fun MapSnippetCard(
@@ -43,14 +44,14 @@ fun MapSnippetCard(
             .height(140.dp)
             .clickable { onClick() },
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFE8F0F2)), // Soft map-like water/land background
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
+        val streetColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
         Box(modifier = Modifier.fillMaxSize()) {
             
             // ── Fausse carte dessinée (Rues et routes) ──
             Canvas(modifier = Modifier.fillMaxSize()) {
-                val streetColor = Color.White
                 
                 // Route principale diagonale
                 drawLine(
@@ -88,7 +89,7 @@ fun MapSnippetCard(
                     .align(Alignment.Center)
                     .shadow(8.dp, RoundedCornerShape(24.dp))
                     .clip(RoundedCornerShape(24.dp))
-                    .background(Color.White)
+                    .background(MaterialTheme.colorScheme.surfaceContainerHighest)
                     .padding(horizontal = 16.dp, vertical = 10.dp)
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -98,7 +99,7 @@ fun MapSnippetCard(
                         text = "Voir sur la carte",
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color(0xFF111111)
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
@@ -113,7 +114,7 @@ private fun MapPin(emoji: String, modifier: Modifier = Modifier) {
             .size(32.dp)
             .shadow(4.dp, CircleShape)
             .clip(CircleShape)
-            .background(Color.White),
+            .background(MaterialTheme.colorScheme.surface),
         contentAlignment = Alignment.Center
     ) {
         Text(text = emoji, fontSize = 16.sp)

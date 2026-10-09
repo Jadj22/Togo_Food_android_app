@@ -34,7 +34,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -57,11 +57,6 @@ import com.example.togofood.ui.components.SectionHeader
 import com.example.togofood.ui.components.WidePromoCarousel
 import com.example.togofood.ui.theme.TogoMotion
 import com.example.togofood.ui.theme.togoEnter
-
-private val PageBg = Color.White
-private val TextPrimary = Color(0xFF111111)
-private val TextSecondary = Color(0xFF666666)
-private val SearchBg = Color(0xFFF5F5F5)
 
 @Composable
 fun HomeScreen(
@@ -145,7 +140,7 @@ fun HomeScreenContent(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .background(PageBg)
+            .background(MaterialTheme.colorScheme.background)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
         item {
@@ -377,7 +372,7 @@ private fun LocationHeader(address: String) {
         Icon(
             Icons.Default.LocationOn,
             contentDescription = stringResource(R.string.cd_location),
-            tint = TextPrimary,
+            tint = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.size(20.dp)
         )
         Spacer(modifier = Modifier.width(6.dp))
@@ -385,7 +380,7 @@ private fun LocationHeader(address: String) {
             text = address,
             fontSize = 15.sp,
             fontWeight = FontWeight.Bold,
-            color = TextPrimary
+            color = MaterialTheme.colorScheme.onBackground
         )
     }
 }
@@ -397,7 +392,7 @@ private fun SearchBar(onTap: () -> Unit = {}) {
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
             .clip(RoundedCornerShape(14.dp))
-            .background(SearchBg)
+            .background(MaterialTheme.colorScheme.surfaceContainerHighest)
             .clickable { onTap() }
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -405,14 +400,14 @@ private fun SearchBar(onTap: () -> Unit = {}) {
         Icon(
             Icons.Default.Search,
             contentDescription = stringResource(R.string.cd_search),
-            tint = TextPrimary,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.size(20.dp)
         )
         Spacer(modifier = Modifier.width(10.dp))
         Text(
             stringResource(R.string.home_search_placeholder),
             fontSize = 15.sp,
-            color = TextSecondary,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontWeight = FontWeight.Medium
         )
     }

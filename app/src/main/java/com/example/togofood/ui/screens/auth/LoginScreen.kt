@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.togofood.R
-import com.example.togofood.ui.components.BrandOrange
+import androidx.compose.material3.MaterialTheme
 import com.example.togofood.ui.components.PasswordField
 import com.example.togofood.ui.components.PhoneTextField
 import com.example.togofood.ui.components.PrimaryButton
@@ -194,7 +194,7 @@ private fun RegisterPrompt(onNavigateToRegister: () -> Unit) {
         Spacer(Modifier.width(4.dp))
         Text(
             text = stringResource(R.string.register_link),
-            color = BrandOrange,
+            color = MaterialTheme.colorScheme.primary,
             fontSize = 15.sp,
             fontWeight = FontWeight.Black,
             modifier = Modifier.clickable { onNavigateToRegister() }

@@ -70,20 +70,15 @@ import com.example.togofood.domain.model.Seller
 import com.example.togofood.domain.model.Variant
 import com.example.togofood.domain.model.VendorStatus
 import com.example.togofood.ui.components.*
+import com.example.togofood.ui.theme.LocalPriceGreen
 import java.util.Locale
 import kotlin.math.roundToInt
 
-private val PageBg        = Color.White
-private val TextPrimary   = Color(0xFF111111)
-private val TextSecondary = Color(0xFF666666)
-private val SurfaceBg     = Color(0xFFF5F5F5)
-private val Outline       = Color(0xFFE0E0E0)
-private val PriceGreen    = Color(0xFF2E7D32)
-private val OrangeStrong  = Color(0xFFC2410C)
+private val OrangeStrong = Color(0xFFC2410C)
 private val WhatsAppGreen = Color(0xFF0E7C66)
 private val PageHPadding = 16.dp
-private val SectionGap   = 32.dp
-private val MinTouch     = 48.dp
+private val SectionGap = 32.dp
+private val MinTouch = 48.dp
 
 private class RequestActions(
     val onModeChange: (RequestMode) -> Unit,
@@ -138,7 +133,7 @@ private fun DetailContent(
     
     val showTitleByScroll by remember { derivedStateOf { scrollState.value > 450 } }
 
-    Box(Modifier.fillMaxSize().background(PageBg).imePadding()) {
+    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).imePadding()) {
         Column(Modifier.fillMaxSize()) {
             Column(Modifier.weight(1f).verticalScroll(scrollState)) {
                 PrepHero(prep, seller, prep.uuid in favIds, scrollState, onBackClick, { FavoritesRepository.toggle(prep.uuid) }, { sharePrep(ctx, prep, chosen, seller) })
@@ -150,9 +145,9 @@ private fun DetailContent(
                         .togoEnter(delayMs = 40)
                 ) {
                     Spacer(Modifier.height(20.dp))
-                    Text(prep.name, fontSize = 26.sp, fontWeight = FontWeight.ExtraBold, color = TextPrimary, lineHeight = 31.sp)
+                    Text(prep.name, fontSize = 26.sp, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onBackground, lineHeight = 31.sp)
                     Spacer(Modifier.height(4.dp))
-                    Text("Chez ${prep.sellerName} · ${prep.sellerZone}", fontSize = 15.sp, color = TextSecondary)
+                    Text("Chez ${prep.sellerName} · ${prep.sellerZone}", fontSize = 15.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Spacer(Modifier.height(12.dp))
                     PriceHeader(prep.variants, chosen)
                     Spacer(Modifier.height(12.dp))
@@ -231,7 +226,7 @@ private fun PrepHero(prep: Preparation, seller: Seller?, isFavorite: Boolean, sc
         label = "prepHeart"
     )
     val heartColor by animateColorAsState(
-        if (isFavorite) Color(0xFFD32F2F) else TextPrimary,
+        if (isFavorite) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface,
         TogoMotion.tweenNormal(),
         label = "prepHeartColor"
     )
@@ -259,26 +254,26 @@ private fun PrepHero(prep: Preparation, seller: Seller?, isFavorite: Boolean, sc
 private fun VariantPicker(variants: List<Variant>, selected: Int, onSelect: (Int) -> Unit) {
     SectionTitle("Choisir une portion")
     Spacer(Modifier.height(12.dp))
-    Row(Modifier.horizontalScroll(rememberScrollState()).selectableGroup(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+Row(Modifier.horizontalScroll(rememberScrollState()).selectableGroup(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         variants.forEachIndexed { i, v ->
             val isSelected = i == selected
             val bgColor by animateColorAsState(
-                if (isSelected) OrangeStrong else Color.White,
+                if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
                 TogoMotion.tweenNormal(),
                 label = "variantBg"
             )
             val textColor by animateColorAsState(
-                if (isSelected) Color.White else PriceGreen,
+                if (isSelected) MaterialTheme.colorScheme.onPrimary else LocalPriceGreen.current,
                 TogoMotion.tweenNormal(),
                 label = "variantFg"
             )
-            
+
             Column(
-                Modifier.heightIn(min = 56.dp).clip(RoundedCornerShape(16.dp)).background(bgColor).border(1.dp, if (isSelected) OrangeStrong else Outline, RoundedCornerShape(16.dp))
+                Modifier.heightIn(min = 56.dp).clip(RoundedCornerShape(16.dp)).background(bgColor).border(1.dp, if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline, RoundedCornerShape(16.dp))
                     .selectable(selected = isSelected, role = Role.RadioButton, onClick = { onSelect(i) }).padding(horizontal = 16.dp, vertical = 10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center
             ) {
-                Text(v.label, fontSize = 13.sp, fontWeight = FontWeight.Bold, color = if (isSelected) Color.White else TextSecondary)
+                Text(v.label, fontSize = 13.sp, fontWeight = FontWeight.Bold, color = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant)
                 Text("${v.priceFcfa.formatFcfa()} F", fontSize = 16.sp, fontWeight = FontWeight.ExtraBold, color = textColor)
             }
         }
@@ -298,15 +293,15 @@ private fun CustomRequestSection(state: CustomRequestState, actions: RequestActi
         Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
-            .background(SurfaceBg)
+            .background(MaterialTheme.colorScheme.surfaceContainer)
             .animateContentSize(TogoMotion.tweenNormal())
     ) {
         Row(Modifier.fillMaxWidth().heightIn(min = MinTouch).clickable { expanded = !expanded }.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 SectionTitle("Personnaliser ma demande")
-                Text(if (state.choiceCount > 0) "Demande prête" else "Options disponibles", fontSize = 13.sp, color = TextSecondary)
+                Text(if (state.choiceCount > 0) "Demande prête" else "Options disponibles", fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            Icon(Icons.Default.KeyboardArrowDown, null, tint = BrandOrange, modifier = Modifier.graphicsLayer { rotationZ = rotation })
+            Icon(Icons.Default.KeyboardArrowDown, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.graphicsLayer { rotationZ = rotation })
         }
 
         if (expanded) {
@@ -330,23 +325,23 @@ private fun CustomRequestSection(state: CustomRequestState, actions: RequestActi
 @Composable
 private fun ChoiceChip(label: String, isSelected: Boolean, multi: Boolean, onClick: () -> Unit) {
     val bgColor by animateColorAsState(
-        if (isSelected) OrangeStrong else Color.White,
+        if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
         TogoMotion.tweenNormal(),
         label = "chipBg"
     )
     val shape = RoundedCornerShape(50)
-    Box(Modifier.heightIn(min = MinTouch).clip(shape).background(bgColor).border(1.dp, if (isSelected) OrangeStrong else Outline, shape).clickable { onClick() }.padding(horizontal = 16.dp, vertical = 10.dp), contentAlignment = Alignment.Center) {
-        Text((if (isSelected) "✓ " else "") + label, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = if (isSelected) Color.White else TextPrimary)
+    Box(Modifier.heightIn(min = MinTouch).clip(shape).background(bgColor).border(1.dp, if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline, shape).clickable { onClick() }.padding(horizontal = 16.dp, vertical = 10.dp), contentAlignment = Alignment.Center) {
+        Text((if (isSelected) "✓ " else "") + label, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface)
     }
 }
 
 @Composable
-private fun SectionTitle(text: String) = Text(text, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
+private fun SectionTitle(text: String) = Text(text, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
 
 @Composable
 private fun PriceHeader(variants: List<Variant>, chosen: Variant?) {
     if (chosen == null) return
-    Text("${chosen.priceFcfa.formatFcfa()} FCFA", fontSize = 28.sp, fontWeight = FontWeight.ExtraBold, color = PriceGreen)
+    Text("${chosen.priceFcfa.formatFcfa()} FCFA", fontSize = 28.sp, fontWeight = FontWeight.ExtraBold, color = LocalPriceGreen.current)
 }
 
 @Composable
@@ -359,21 +354,21 @@ private fun PrepPhoto(prep: Preparation) {
 
 @Composable
 private fun AvailabilityBadge(status: AvailabilityStatus, label: String, modifier: Modifier) {
-    Row(modifier.clip(RoundedCornerShape(50)).background(Color.White).padding(horizontal = 12.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+    Row(modifier.clip(RoundedCornerShape(50)).background(MaterialTheme.colorScheme.surface).padding(horizontal = 12.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
         Box(Modifier.size(9.dp).clip(CircleShape).background(status.color))
         Spacer(Modifier.width(7.dp))
-        Text(label, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = TextPrimary)
+        Text(label, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurface)
     }
 }
 
 @Composable
 private fun InfoChips(prep: Preparation, dist: String) {
     Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        Box(Modifier.clip(RoundedCornerShape(50)).background(SurfaceBg).padding(horizontal = 14.dp, vertical = 8.dp)) {
-            Text("📍 $dist", fontSize = 13.sp, fontWeight = FontWeight.Medium)
+        Box(Modifier.clip(RoundedCornerShape(50)).background(MaterialTheme.colorScheme.surfaceContainer).padding(horizontal = 14.dp, vertical = 8.dp)) {
+            Text("📍 $dist", fontSize = 13.sp, fontWeight = FontWeight.Medium, color = MaterialTheme.colorScheme.onSurface)
         }
-        Box(Modifier.clip(RoundedCornerShape(50)).background(SurfaceBg).padding(horizontal = 14.dp, vertical = 8.dp)) {
-            Text("⭐ ${String.format("%.1f", prep.rating)}", fontSize = 13.sp, fontWeight = FontWeight.Medium)
+        Box(Modifier.clip(RoundedCornerShape(50)).background(MaterialTheme.colorScheme.surfaceContainer).padding(horizontal = 14.dp, vertical = 8.dp)) {
+            Text("⭐ ${String.format("%.1f", prep.rating)}", fontSize = 13.sp, fontWeight = FontWeight.Medium, color = MaterialTheme.colorScheme.onSurface)
         }
     }
 }
@@ -384,40 +379,40 @@ private fun SellerCard(prep: Preparation, seller: Seller?, onSellerClick: (Strin
         Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
-            .background(SurfaceBg)
+            .background(MaterialTheme.colorScheme.surfaceContainer)
             .clickable { onSellerClick(prep.sellerId) }
             .padding(14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
-            Modifier.size(52.dp).clip(CircleShape).background(Color.White),
+            Modifier.size(52.dp).clip(CircleShape).background(MaterialTheme.colorScheme.surface),
             contentAlignment = Alignment.Center
         ) {
             Icon(
                 Icons.Default.Person,
                 contentDescription = null,
-                tint = BrandOrange,
+                tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(26.dp)
             )
         }
         Spacer(Modifier.width(12.dp))
         Column(Modifier.weight(1f)) {
-            Text(prep.sellerName, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = TextPrimary)
+            Text(prep.sellerName, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface)
             if (seller?.isVerified == true) {
                 Text(
                     stringResource(R.string.seller_verified),
                     fontSize = 13.sp,
-                    color = OrangeStrong
+                    color = MaterialTheme.colorScheme.primary
                 )
             } else {
                 Text(
                     "${prep.sellerZone} · ${prep.distanceMeters.formatDistance()}",
                     fontSize = 13.sp,
-                    color = TextSecondary
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
-        Icon(Icons.AutoMirrored.Filled.ArrowForward, null, tint = BrandOrange)
+        Icon(Icons.AutoMirrored.Filled.ArrowForward, null, tint = MaterialTheme.colorScheme.primary)
     }
 }
 
@@ -425,17 +420,17 @@ private fun SellerCard(prep: Preparation, seller: Seller?, onSellerClick: (Strin
 private fun AboutBlock(desc: String) {
     SectionTitle("À propos")
     Spacer(Modifier.height(8.dp))
-    Text(desc, fontSize = 15.sp, color = TextSecondary, lineHeight = 22.sp)
+    Text(desc, fontSize = 15.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 22.sp)
 }
 
 @Composable
 private fun WhereToFindBlock(prep: Preparation, seller: Seller?, onItinerary: () -> Unit) {
     SectionTitle("Localisation")
     Spacer(Modifier.height(8.dp))
-    Text("📍 ${prep.sellerZone}", fontSize = 15.sp, fontWeight = FontWeight.Medium)
+    Text("📍 ${prep.sellerZone}", fontSize = 15.sp, fontWeight = FontWeight.Medium, color = MaterialTheme.colorScheme.onSurface)
     Spacer(Modifier.height(12.dp))
-    OutlinedButton(onClick = onItinerary, modifier = Modifier.fillMaxWidth().height(MinTouch), shape = RoundedCornerShape(50), border = BorderStroke(1.dp, OrangeStrong)) {
-        Text("Voir l'itinéraire", color = OrangeStrong, fontWeight = FontWeight.Bold)
+    OutlinedButton(onClick = onItinerary, modifier = Modifier.fillMaxWidth().height(MinTouch), shape = RoundedCornerShape(50), border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary)) {
+        Text("Voir l'itinéraire", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
     }
 }
 
@@ -443,23 +438,23 @@ private fun WhereToFindBlock(prep: Preparation, seller: Seller?, onItinerary: ()
 private fun ReviewsBlock(prep: Preparation) {
     SectionTitle("Avis")
     Spacer(Modifier.height(12.dp))
-    Box(Modifier.fillMaxWidth().clip(RoundedCornerShape(16.dp)).background(SurfaceBg).padding(16.dp)) {
-        Text("⭐ ${String.format("%.1f", prep.rating)} (${prep.reviewCount} avis)", fontWeight = FontWeight.Bold)
+    Box(Modifier.fillMaxWidth().clip(RoundedCornerShape(16.dp)).background(MaterialTheme.colorScheme.surfaceContainer).padding(16.dp)) {
+        Text("⭐ ${String.format("%.1f", prep.rating)} (${prep.reviewCount} avis)", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
     }
 }
 
 @Composable
 private fun ActionBar(hasPhone: Boolean, chosen: Variant?, label: String, onSeller: () -> Unit, onCall: () -> Unit, onWhatsApp: () -> Unit) {
-    Row(Modifier.fillMaxWidth().navigationBarsPadding().background(Color.White).padding(horizontal = PageHPadding, vertical = 12.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+    Row(Modifier.fillMaxWidth().navigationBarsPadding().background(MaterialTheme.colorScheme.surface).padding(horizontal = PageHPadding, vertical = 12.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         if (hasPhone) {
-            OutlinedButton(onClick = onCall, Modifier.weight(1f).heightIn(min = 56.dp), shape = RoundedCornerShape(50), border = BorderStroke(1.dp, OrangeStrong)) {
-                Icon(Icons.Default.Call, null, tint = OrangeStrong); Spacer(Modifier.width(8.dp)); Text("Appeler", color = OrangeStrong)
+            OutlinedButton(onClick = onCall, Modifier.weight(1f).heightIn(min = 56.dp), shape = RoundedCornerShape(50), border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary)) {
+                Icon(Icons.Default.Call, null, tint = MaterialTheme.colorScheme.primary); Spacer(Modifier.width(8.dp)); Text("Appeler", color = MaterialTheme.colorScheme.primary)
             }
             Button(onClick = onWhatsApp, Modifier.weight(1.5f).heightIn(min = 56.dp), shape = RoundedCornerShape(50), colors = ButtonDefaults.buttonColors(containerColor = WhatsAppGreen)) {
                 Text(label, fontWeight = FontWeight.Bold)
             }
         } else {
-            Button(onClick = onSeller, Modifier.fillMaxWidth().heightIn(min = 56.dp), shape = RoundedCornerShape(50), colors = ButtonDefaults.buttonColors(containerColor = OrangeStrong)) {
+            Button(onClick = onSeller, Modifier.fillMaxWidth().heightIn(min = 56.dp), shape = RoundedCornerShape(50), colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)) {
                 Text("Voir le vendeur", fontWeight = FontWeight.Bold)
             }
         }
@@ -467,7 +462,7 @@ private fun ActionBar(hasPhone: Boolean, chosen: Variant?, label: String, onSell
 }
 
 @Composable
-private fun CircleBtn(icon: ImageVector, desc: String, onClick: () -> Unit, tint: Color = TextPrimary, modifier: Modifier = Modifier, background: Color = Color.White.copy(alpha = 0.9f)) {
+private fun CircleBtn(icon: ImageVector, desc: String, onClick: () -> Unit, tint: Color = MaterialTheme.colorScheme.onSurface, modifier: Modifier = Modifier, background: Color = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)) {
     Box(modifier.size(MinTouch).clip(CircleShape).background(background).clickable { onClick() }, contentAlignment = Alignment.Center) {
         Icon(icon, desc, tint = tint, modifier = Modifier.size(22.dp))
     }
@@ -475,7 +470,7 @@ private fun CircleBtn(icon: ImageVector, desc: String, onClick: () -> Unit, tint
 
 @Composable
 private fun DetailSkeleton(onBackClick: () -> Unit) {
-    Box(Modifier.fillMaxSize().background(PageBg)) {
+    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         Column(Modifier.fillMaxSize().padding(PageHPadding)) {
             Spacer(Modifier.height(48.dp))
             Box(Modifier.fillMaxWidth().height(280.dp).clip(RoundedCornerShape(16.dp)).shimmerEffect())
@@ -499,18 +494,18 @@ private fun DetailMessage(
     onAction: () -> Unit,
     onBackClick: () -> Unit
 ) {
-    Box(Modifier.fillMaxSize().background(PageBg)) {
+    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         Column(
             Modifier.fillMaxSize().padding(32.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(title, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = TextPrimary, textAlign = TextAlign.Center)
+            Text(title, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface, textAlign = TextAlign.Center)
             if (actionLabel != null) {
                 Spacer(Modifier.height(20.dp))
                 Button(
                     onClick = onAction,
-                    colors = ButtonDefaults.buttonColors(containerColor = OrangeStrong),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                     shape = RoundedCornerShape(50)
                 ) {
                     Text(actionLabel, fontWeight = FontWeight.Bold)
@@ -518,7 +513,7 @@ private fun DetailMessage(
             }
             Spacer(Modifier.height(12.dp))
             TextButton(onClick = onBackClick) {
-                Text("Retour", color = TextSecondary)
+                Text("Retour", color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
         Box(Modifier.windowInsetsPadding(WindowInsets.statusBars).padding(PageHPadding)) {
@@ -533,14 +528,14 @@ private fun RequestModeSwitch(mode: RequestMode, onChange: (RequestMode) -> Unit
         Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(12.dp))
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.surface)
             .padding(4.dp),
         horizontalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         listOf(RequestMode.CHOOSE to "Choisir", RequestMode.WRITE to "Écrire").forEach { (m, label) ->
             val selected = mode == m
             val bg by animateColorAsState(
-                if (selected) OrangeStrong else Color.Transparent,
+                if (selected) MaterialTheme.colorScheme.primary else Color.Transparent,
                 TogoMotion.tweenNormal(),
                 label = "modeBg"
             )
@@ -558,7 +553,7 @@ private fun RequestModeSwitch(mode: RequestMode, onChange: (RequestMode) -> Unit
                     label,
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp,
-                    color = if (selected) Color.White else TextSecondary
+                    color = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
@@ -572,7 +567,7 @@ private fun OptionGroupRow(
     onToggle: (String) -> Unit
 ) {
     Column(Modifier.fillMaxWidth()) {
-        Text(group.title, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = TextPrimary)
+        Text(group.title, fontWeight = FontWeight.Bold, fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface)
         Spacer(Modifier.height(8.dp))
         Row(
             Modifier.horizontalScroll(rememberScrollState()),
@@ -598,10 +593,10 @@ private fun RequestMessageEditor(
 ) {
     Column(Modifier.fillMaxWidth()) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-            Text("Message", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = TextPrimary)
+            Text("Message", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface)
             if (state.isMessageEdited) {
                 TextButton(onClick = onReset, contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp)) {
-                    Text("Réinitialiser", color = OrangeStrong, fontSize = 13.sp)
+                    Text("Réinitialiser", color = MaterialTheme.colorScheme.primary, fontSize = 13.sp)
                 }
             }
         }
@@ -613,10 +608,10 @@ private fun RequestMessageEditor(
             maxLines = 6,
             shape = RoundedCornerShape(12.dp),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = OrangeStrong,
-                unfocusedBorderColor = Outline,
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+                focusedContainerColor = MaterialTheme.colorScheme.surface,
+                unfocusedContainerColor = MaterialTheme.colorScheme.surface
             ),
             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
         )

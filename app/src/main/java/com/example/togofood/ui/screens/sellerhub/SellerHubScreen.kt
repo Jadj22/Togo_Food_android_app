@@ -50,7 +50,7 @@ import com.example.togofood.R
 import com.example.togofood.domain.model.Preparation
 import com.example.togofood.domain.model.Seller
 import com.example.togofood.domain.model.SellerOpenStatus
-import com.example.togofood.ui.components.BrandOrange
+import androidx.compose.material3.MaterialTheme
 import com.example.togofood.ui.components.FoodIcons
 import com.example.togofood.ui.components.PreparationCard
 import com.example.togofood.ui.components.PrimaryButton
@@ -438,7 +438,7 @@ private fun HubEmptyStockBanner(
             stringResource(R.string.seller_hub_empty_stock_cta, pausedCount),
             fontWeight = FontWeight.Bold,
             fontSize = 13.sp,
-            color = BrandOrange,
+            color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.clickable(onClick = onCta)
         )
     }
@@ -537,7 +537,7 @@ private fun HubPrepsHeader(
         Row(
             modifier = Modifier
                 .clip(RoundedCornerShape(Radius))
-                .background(BrandOrange.copy(alpha = 0.12f))
+                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.12f))
                 .clickable(onClick = onAddClick)
                 .padding(horizontal = 12.dp, vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -545,13 +545,13 @@ private fun HubPrepsHeader(
             Icon(
                 Icons.Default.Add,
                 contentDescription = null,
-                tint = BrandOrange,
+                tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(18.dp)
             )
             Spacer(Modifier.width(4.dp))
             Text(
                 stringResource(R.string.seller_hub_add_prep),
-                color = BrandOrange,
+                color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Bold,
                 fontSize = 13.sp
             )
@@ -694,7 +694,7 @@ private fun HubFilterEmpty(
         Spacer(Modifier.height(12.dp))
         Text(
             stringResource(R.string.seller_hub_filter_empty_cta),
-            color = BrandOrange,
+            color = MaterialTheme.colorScheme.primary,
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp,
             modifier = Modifier.clickable(onClick = onShowAll)
@@ -723,7 +723,7 @@ private fun HubEmptyPreps(
             Icon(
                 Icons.Default.Add,
                 contentDescription = null,
-                tint = BrandOrange,
+                tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(32.dp)
             )
         }

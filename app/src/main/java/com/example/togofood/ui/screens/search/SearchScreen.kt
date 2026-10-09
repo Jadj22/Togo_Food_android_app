@@ -48,7 +48,7 @@ import com.example.togofood.domain.model.Category
 import com.example.togofood.domain.model.Seller
 import com.example.togofood.domain.model.SellerOpenStatus
 import com.example.togofood.domain.model.SellerScheduleResolver
-import com.example.togofood.ui.components.BrandOrange
+import androidx.compose.material3.MaterialTheme
 import com.example.togofood.ui.components.MenuItemRow
 import com.example.togofood.ui.components.SearchResultSkeleton
 import com.example.togofood.ui.components.UnderlineTabs
@@ -57,20 +57,9 @@ import com.example.togofood.ui.theme.TogoMotion
 import com.example.togofood.ui.theme.togoEnter
 import kotlinx.coroutines.launch
 
-private val Ink           = Color(0xFF111111)
-private val Muted         = Color(0xFF6B6B6B)
-private val SurfaceBg     = Color(0xFFF5F5F5)
-private val OrangeStrong  = Color(0xFFC2410C)
-private val OrangeTint    = Color(0xFFFFEDE3)
-private val OpenGreen     = Color(0xFF2E7D32)
-private val ClosedRed     = Color(0xFFC62828)
-private val SoftMuted     = Color(0xFF8A8A8A)
-private val StarGold      = Color(0xFFF08C00)
-private val SoonOrange    = Color(0xFFF08C00)
-private val Radius        = 14.dp
-
-private val TextPrimary = Color(0xFF111111)
-private val ChipBg = Color(0xFFF5F5F5)
+private val OrangeStrong = Color(0xFFC2410C)
+private val OrangeTint = Color(0xFFFFEDE3)
+private val Radius = 14.dp
 
 private const val TAB_PREPARATIONS = 0
 private const val TAB_SELLERS = 1
@@ -102,7 +91,7 @@ fun SearchScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.background)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
         Box(
@@ -110,7 +99,7 @@ fun SearchScreen(
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 12.dp)
                 .clip(RoundedCornerShape(24.dp))
-                .background(SurfaceBg)
+.background(MaterialTheme.colorScheme.surfaceContainer)
                 .padding(horizontal = 16.dp, vertical = 12.dp),
             contentAlignment = Alignment.CenterStart
         ) {
@@ -121,7 +110,7 @@ fun SearchScreen(
                     if (state.query.isEmpty()) {
                         Text(
                             text = stringResource(R.string.search_placeholder),
-                            color = Muted,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             fontSize = 15.sp,
                             fontWeight = FontWeight.Medium
                         )
@@ -133,19 +122,19 @@ fun SearchScreen(
                             .fillMaxWidth()
                             .focusRequester(focusRequester),
                         textStyle = TextStyle(
-                            color = Ink,
+                            color = MaterialTheme.colorScheme.onSurface,
                             fontSize = 15.sp,
                             fontWeight = FontWeight.Medium
                         ),
                         singleLine = true,
-                        cursorBrush = SolidColor(Color(0xFFE65100))
+                        cursorBrush = SolidColor(MaterialTheme.colorScheme.primary)
                     )
                 }
                 if (state.query.isNotEmpty()) {
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = stringResource(R.string.search_clear),
-                        tint = Muted,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier
                             .size(20.dp)
                             .clip(CircleShape)
@@ -233,12 +222,12 @@ private fun AdvancedFiltersChip(
     onClick: () -> Unit
 ) {
     val bg by animateColorAsState(
-        targetValue = if (active) Ink else SurfaceBg,
+        targetValue = if (active) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.surfaceContainer,
         animationSpec = TogoMotion.tweenNormal(),
         label = "advBg"
     )
     val fg by animateColorAsState(
-        targetValue = if (active) Color.White else Ink,
+        targetValue = if (active) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.onSurface,
         animationSpec = TogoMotion.tweenNormal(),
         label = "advFg"
     )
@@ -264,7 +253,7 @@ private fun AdvancedFiltersChip(
                 modifier = Modifier
                     .size(7.dp)
                     .clip(CircleShape)
-                    .background(OrangeStrong)
+                    .background(MaterialTheme.colorScheme.primary)
             )
         }
     }
@@ -331,10 +320,10 @@ private fun ResultsContent(
                     LazyColumn(Modifier.fillMaxSize()) {
                         items(6) {
                             SearchResultSkeleton()
-                            HorizontalDivider(
-                                color = Color(0xFFF0F0F0),
-                                modifier = Modifier.padding(horizontal = 16.dp)
-                            )
+HorizontalDivider(
+                                    color = MaterialTheme.colorScheme.outlineVariant,
+                                    modifier = Modifier.padding(horizontal = 16.dp)
+                                )
                         }
                     }
                 }
@@ -363,7 +352,7 @@ private fun ResultsContent(
                                     onClick = { onItemClick(item.uuid) }
                                 )
                                 HorizontalDivider(
-                                    color = Color(0xFFF0F0F0),
+                                    color = MaterialTheme.colorScheme.outlineVariant,
                                     modifier = Modifier.padding(horizontal = 16.dp)
                                 )
                             }
@@ -374,7 +363,7 @@ private fun ResultsContent(
                                     onClick = { onSellerClick(seller.uuid) }
                                 )
                                 HorizontalDivider(
-                                    color = Color(0xFFF0F0F0),
+                                    color = MaterialTheme.colorScheme.outlineVariant,
                                     modifier = Modifier.padding(horizontal = 16.dp)
                                 )
                             }
@@ -393,12 +382,12 @@ private fun FilterChip(
     onClick: () -> Unit
 ) {
     val bgColor by animateColorAsState(
-        targetValue = if (isSelected) Ink else SurfaceBg,
+        targetValue = if (isSelected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.surfaceContainer,
         animationSpec = TogoMotion.tweenNormal(),
         label = "filterBg"
     )
     val textColor by animateColorAsState(
-        targetValue = if (isSelected) Color.White else Ink,
+        targetValue = if (isSelected) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.onSurface,
         animationSpec = TogoMotion.tweenNormal(),
         label = "filterText"
     )
@@ -428,12 +417,12 @@ fun SearchFilterChip(
     modifier: Modifier = Modifier
 ) {
     val bgColor by animateColorAsState(
-        if (isSelected) TextPrimary else ChipBg,
+        if (isSelected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.surfaceContainer,
         TogoMotion.tweenNormal(),
         label = "searchFilterBg"
     )
     val textColor by animateColorAsState(
-        if (isSelected) Color.White else TextPrimary,
+        if (isSelected) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.onSurface,
         TogoMotion.tweenNormal(),
         label = "searchFilterText"
     )
@@ -479,7 +468,7 @@ private fun SellerResultRow(
             modifier = Modifier
                 .size(64.dp)
                 .clip(RoundedCornerShape(14.dp))
-                .background(if (isOpen) OrangeTint else SurfaceBg),
+                .background(if (isOpen) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceContainer),
             contentAlignment = Alignment.Center
         ) {
             Text("🏪", fontSize = 28.sp)
@@ -496,7 +485,7 @@ private fun SellerResultRow(
                     text = seller.name,
                     fontWeight = FontWeight.ExtraBold,
                     fontSize = 16.sp,
-                    color = Ink,
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f, fill = false)
@@ -505,7 +494,7 @@ private fun SellerResultRow(
                     Spacer(Modifier.width(6.dp))
                     Text(
                         text = "✓",
-                        color = OrangeStrong,
+                        color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold,
                         fontSize = 14.sp
                     )
@@ -516,7 +505,7 @@ private fun SellerResultRow(
                 Text(
                     text = seller.description,
                     fontSize = 12.sp,
-                    color = SoftMuted,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     lineHeight = 16.sp
@@ -532,7 +521,7 @@ private fun SellerResultRow(
                 ),
                 fontSize = 13.sp,
                 fontWeight = FontWeight.SemiBold,
-                color = Muted,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -544,7 +533,7 @@ private fun SellerResultRow(
                 Icon(
                     imageVector = Icons.Default.Star,
                     contentDescription = null,
-                    tint = StarGold,
+                    tint = MaterialTheme.colorScheme.tertiary,
                     modifier = Modifier.size(14.dp)
                 )
                 Text(
@@ -555,7 +544,7 @@ private fun SellerResultRow(
                     ),
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Medium,
-                    color = SoftMuted
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -567,9 +556,9 @@ private fun SellerResultRow(
 @Composable
 private fun SellerOpenBadge(status: SellerOpenStatus) {
     val (labelRes, color) = when (status) {
-        SellerOpenStatus.OPEN -> R.string.seller_open to OpenGreen
-        SellerOpenStatus.CLOSED -> R.string.seller_closed to ClosedRed
-        SellerOpenStatus.OPENING_SOON -> R.string.seller_opening_soon to SoonOrange
+        SellerOpenStatus.OPEN -> R.string.seller_open to MaterialTheme.colorScheme.tertiary
+        SellerOpenStatus.CLOSED -> R.string.seller_closed to MaterialTheme.colorScheme.error
+        SellerOpenStatus.OPENING_SOON -> R.string.seller_opening_soon to MaterialTheme.colorScheme.secondary
     }
     check(labelRes != 0) { "Unhandled SellerOpenStatus: $status" }
 
@@ -616,14 +605,15 @@ private fun EmptyResults(
             text = title,
             fontSize = 17.sp,
             fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onSurface
         )
         if (hasFilters) {
             Spacer(Modifier.height(8.dp))
             TextButton(onClick = onClear) {
                 Text(
                     text = stringResource(R.string.search_reset_filters),
-                    color = OrangeStrong
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         }
@@ -640,14 +630,15 @@ private fun CategorySearchCard(
             .fillMaxWidth()
             .height(80.dp)
             .clip(RoundedCornerShape(12.dp))
-            .background(SurfaceBg)
+            .background(MaterialTheme.colorScheme.surfaceContainer)
             .clickable(onClick = onClick)
             .padding(12.dp)
     ) {
         Text(
             text = category.label,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.align(Alignment.TopStart)
+            modifier = Modifier.align(Alignment.TopStart),
+            color = MaterialTheme.colorScheme.onSurface
         )
         Text(
             text = category.emoji,

@@ -51,20 +51,20 @@ fun LabeledTextField(
             text = label,
             fontSize = 14.sp,
             fontWeight = FontWeight.SemiBold,
-            color = Color.Black
+            color = MaterialTheme.colorScheme.onSurface
         )
         Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
             modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text(placeholder, color = Color.LightGray) },
+            placeholder = { Text(placeholder, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)) },
             trailingIcon = trailingIcon,
             isError = isError,
             shape = RoundedCornerShape(12.dp),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = BrandOrange,
-                unfocusedBorderColor = LightGrey,
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant,
                 errorBorderColor = MaterialTheme.colorScheme.error
             ),
             singleLine = true
@@ -108,7 +108,7 @@ fun PhoneTextField(
             value = value,
             onValueChange = onValueChange,
             modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text(placeholder, color = Color.LightGray) },
+            placeholder = { Text(placeholder, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)) },
             leadingIcon = {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -119,7 +119,7 @@ fun PhoneTextField(
                     Text(
                         text = "+228",
                         fontSize = 14.sp,
-                        color = Color.Black,
+                        color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = FontWeight.Medium
                     )
                 }
@@ -128,8 +128,8 @@ fun PhoneTextField(
             isError = isError,
             shape = RoundedCornerShape(12.dp),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = BrandOrange,
-                unfocusedBorderColor = LightGrey,
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant,
                 errorBorderColor = MaterialTheme.colorScheme.error
             ),
             singleLine = true
@@ -168,14 +168,14 @@ fun PasswordField(
             text = label,
             fontSize = 14.sp,
             fontWeight = FontWeight.SemiBold,
-            color = Color.Black
+            color = MaterialTheme.colorScheme.onSurface
         )
         Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
             modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text(placeholder, color = Color.LightGray) },
+            placeholder = { Text(placeholder, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)) },
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             isError = isError,
@@ -189,13 +189,13 @@ fun PasswordField(
                         ),
                         contentDescription = if (passwordVisible) "Masquer" else "Afficher",
                         modifier = Modifier.size(22.dp),
-                        tint = Color(0xFF757575)
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             },
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = BrandOrange,
-                unfocusedBorderColor = LightGrey,
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant,
                 errorBorderColor = MaterialTheme.colorScheme.error
             ),
             singleLine = true

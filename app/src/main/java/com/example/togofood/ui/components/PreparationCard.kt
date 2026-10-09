@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -30,6 +31,7 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -39,7 +41,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -49,13 +50,9 @@ import com.example.togofood.R
 import com.example.togofood.domain.model.AvailabilityStatus
 import com.example.togofood.domain.model.Preparation
 import com.example.togofood.domain.model.SellerOpenStatus
+import com.example.togofood.ui.theme.LocalPriceGreen
 import com.example.togofood.ui.theme.TogoMotion
 
-private val TextPrimary = Color(0xFF111111)
-private val SoftMuted = Color(0xFF8A8A8A)
-private val PriceGreen = Color(0xFF2E7D32)
-private val StarGold = Color(0xFFF08C00)
-private val photoPlaceholderBg = Color(0xFFF0F0F0)
 private val CardRadius = 14.dp
 private val MediaHeight = 160.dp
 
@@ -80,7 +77,7 @@ fun PreparationCard(
     )
 
     val heartColor by animateColorAsState(
-        if (isFavorite) BrandOrange else TextPrimary,
+        if (isFavorite) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface,
         TogoMotion.tweenNormal(),
         label = "heartColor"
     )
@@ -110,7 +107,7 @@ fun PreparationCard(
                     .clip(RoundedCornerShape(CardRadius))
                     .background(
                         FoodIcons.pastelBackgrounds[preparation.categoryId]
-                            ?: photoPlaceholderBg
+                            ?: MaterialTheme.colorScheme.surfaceContainerHighest
                     )
                     .alpha(if (unavailable) 0.55f else 1f),
                 contentAlignment = Alignment.Center
@@ -153,7 +150,7 @@ fun PreparationCard(
                         Modifier
                             .size(28.dp)
                             .clip(CircleShape)
-                            .background(Color.White),
+                            .background(MaterialTheme.colorScheme.surface),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
@@ -179,7 +176,7 @@ fun PreparationCard(
                 preparation.name,
                 fontSize = 15.sp,
                 fontWeight = FontWeight.ExtraBold,
-                color = TextPrimary,
+                color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 lineHeight = 18.sp
@@ -192,7 +189,7 @@ fun PreparationCard(
                     preparation.sellerName,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Medium,
-                    color = SoftMuted,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -203,7 +200,7 @@ fun PreparationCard(
                     Icon(
                         Icons.Default.Star,
                         contentDescription = null,
-                        tint = StarGold,
+                        tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(12.dp)
                     )
                     Spacer(Modifier.width(3.dp))
@@ -214,16 +211,16 @@ fun PreparationCard(
                             preparation.reviewCount.toString()
                         ),
                         fontSize = 11.sp,
-                        color = SoftMuted,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
-                    Text(" · ", fontSize = 11.sp, color = SoftMuted)
+                    Text(" · ", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 Text(
                     preparation.distanceMeters.formatDistance(),
                     fontSize = 11.sp,
-                    color = SoftMuted,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -244,7 +241,7 @@ fun PreparationCard(
                 },
                 fontSize = 14.sp,
                 fontWeight = FontWeight.ExtraBold,
-                color = PriceGreen,
+                color = LocalPriceGreen.current,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -255,9 +252,9 @@ fun PreparationCard(
 @Composable
 private fun SellerOpenChip(status: SellerOpenStatus) {
     val (labelRes, color) = when (status) {
-        SellerOpenStatus.OPEN -> R.string.seller_open to Color(0xFF2F9E44)
-        SellerOpenStatus.CLOSED -> R.string.seller_closed to Color(0xFF6C757D)
-        SellerOpenStatus.OPENING_SOON -> R.string.seller_opening_soon to Color(0xFFF08C00)
+        SellerOpenStatus.OPEN -> R.string.seller_open to Color(0xFF2E7D32)  // PriceGreen - succès
+        SellerOpenStatus.CLOSED -> R.string.seller_closed to MaterialTheme.colorScheme.onSurfaceVariant
+        SellerOpenStatus.OPENING_SOON -> R.string.seller_opening_soon to MaterialTheme.colorScheme.primary  // orange - attention
     }
     Row(
         modifier = Modifier
@@ -361,7 +358,7 @@ fun WidePromoCard(
                     preparation.name,
                     fontSize = 17.sp,
                     fontWeight = FontWeight.ExtraBold,
-                    color = TextPrimary,
+color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -370,7 +367,7 @@ fun WidePromoCard(
                     preparation.sellerName,
                     fontSize = 13.sp,
                     fontWeight = FontWeight.Medium,
-                    color = SoftMuted,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -379,7 +376,7 @@ fun WidePromoCard(
                     promoLabel,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = TextPrimary.copy(alpha = 0.7f),
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -388,7 +385,7 @@ fun WidePromoCard(
                     stringResource(R.string.card_price_from, preparation.basePrice.formatFcfa()),
                     fontSize = 14.sp,
                     fontWeight = FontWeight.ExtraBold,
-                    color = PriceGreen
+                    color = LocalPriceGreen.current
                 )
             }
             Box(
