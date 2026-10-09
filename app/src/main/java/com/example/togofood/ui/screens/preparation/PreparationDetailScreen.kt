@@ -71,6 +71,7 @@ import com.example.togofood.domain.model.Variant
 import com.example.togofood.domain.model.VendorStatus
 import com.example.togofood.ui.components.*
 import com.example.togofood.ui.theme.LocalPriceGreen
+import com.example.togofood.ui.components.formatFcfa
 import java.util.Locale
 import kotlin.math.roundToInt
 
@@ -149,7 +150,7 @@ private fun DetailContent(
                     Spacer(Modifier.height(4.dp))
                     Text("Chez ${prep.sellerName} · ${prep.sellerZone}", fontSize = 15.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Spacer(Modifier.height(12.dp))
-                    PriceHeader(prep.variants, chosen)
+                    PriceHeader(prep.variants, chosen, request.extraTotal)
                     Spacer(Modifier.height(12.dp))
                     InfoChips(prep, prep.distanceMeters.formatDistance())
 
@@ -189,7 +190,7 @@ private fun DetailContent(
                 }
                 Spacer(Modifier.height(24.dp))
             }
-            ActionBar(hasPhone, chosen, if (request.isPersonalized) "💬 Envoyer au vendeur" else "💬 WhatsApp", { onSellerClick(prep.sellerId) }, { dialPhone(ctx, seller?.phone) }, { openWhatsApp(ctx, seller?.phone, requestActions.messageToSend()) })
+            ActionBar(hasPhone, chosen, if (request.isPersonalized) "💬 Envoyer au vendeur" else "💬 WhatsApp", { onSellerClick(prep.sellerId) }, { dialPhone(ctx, seller?.phone) }, { openWhatsApp(ctx, seller?.phone, requestActions.messageToSend()) }, request.extraTotal)
         }
 
         // Barre de titre collante
@@ -323,15 +324,25 @@ private fun CustomRequestSection(state: CustomRequestState, actions: RequestActi
 // ───────────────────────────── Rest of UI (stubs for missing components) ─────────────────────────────
 
 @Composable
-private fun ChoiceChip(label: String, isSelected: Boolean, multi: Boolean, onClick: () -> Unit) {
+private fun ChoiceChip(
+    option: RequestOption,
+    isSelected: Boolean,
+    multi: Boolean,
+    onClick: () -> Unit
+) {
     val bgColor by animateColorAsState(
         if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
         TogoMotion.tweenNormal(),
         label = "chipBg"
     )
     val shape = RoundedCornerShape(50)
+    val displayText = buildString {
+        append((if (isSelected) "✓ " else ""))
+        append(option.label)
+        if (option.isPaid) append(" (+${formatFcfa(option.extraPrice)})")
+    }
     Box(Modifier.heightIn(min = MinTouch).clip(shape).background(bgColor).border(1.dp, if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline, shape).clickable { onClick() }.padding(horizontal = 16.dp, vertical = 10.dp), contentAlignment = Alignment.Center) {
-        Text((if (isSelected) "✓ " else "") + label, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface)
+        Text(displayText, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface)
     }
 }
 
@@ -339,9 +350,16 @@ private fun ChoiceChip(label: String, isSelected: Boolean, multi: Boolean, onCli
 private fun SectionTitle(text: String) = Text(text, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
 
 @Composable
-private fun PriceHeader(variants: List<Variant>, chosen: Variant?) {
+private fun PriceHeader(variants: List<Variant>, chosen: Variant?, extraTotal: Int = 0) {
     if (chosen == null) return
-    Text("${chosen.priceFcfa.formatFcfa()} FCFA", fontSize = 28.sp, fontWeight = FontWeight.ExtraBold, color = LocalPriceGreen.current)
+    val basePrice = chosen.priceFcfa
+    val totalPrice = basePrice + extraTotal
+    val priceText = if (extraTotal > 0) {
+        "${formatFcfa(basePrice)} + ${formatFcfa(extraTotal)} = ${formatFcfa(totalPrice)}"
+    } else {
+        "${formatFcfa(basePrice)} FCFA"
+    }
+    Text(priceText, fontSize = 28.sp, fontWeight = FontWeight.ExtraBold, color = LocalPriceGreen.current)
 }
 
 @Composable
@@ -444,14 +462,21 @@ private fun ReviewsBlock(prep: Preparation) {
 }
 
 @Composable
-private fun ActionBar(hasPhone: Boolean, chosen: Variant?, label: String, onSeller: () -> Unit, onCall: () -> Unit, onWhatsApp: () -> Unit) {
+private fun ActionBar(hasPhone: Boolean, chosen: Variant?, label: String, onSeller: () -> Unit, onCall: () -> Unit, onWhatsApp: () -> Unit, extraTotal: Int = 0) {
+    val basePrice = chosen?.priceFcfa ?: 0
+    val totalPrice = basePrice + extraTotal
+    val totalLabel = if (extraTotal > 0) {
+        "$label (Total: ${formatFcfa(totalPrice)})"
+    } else {
+        label
+    }
     Row(Modifier.fillMaxWidth().navigationBarsPadding().background(MaterialTheme.colorScheme.surface).padding(horizontal = PageHPadding, vertical = 12.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         if (hasPhone) {
             OutlinedButton(onClick = onCall, Modifier.weight(1f).heightIn(min = 56.dp), shape = RoundedCornerShape(50), border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary)) {
                 Icon(Icons.Default.Call, null, tint = MaterialTheme.colorScheme.primary); Spacer(Modifier.width(8.dp)); Text("Appeler", color = MaterialTheme.colorScheme.primary)
             }
             Button(onClick = onWhatsApp, Modifier.weight(1.5f).heightIn(min = 56.dp), shape = RoundedCornerShape(50), colors = ButtonDefaults.buttonColors(containerColor = WhatsAppGreen)) {
-                Text(label, fontWeight = FontWeight.Bold)
+                Text(totalLabel, fontWeight = FontWeight.Bold)
             }
         } else {
             Button(onClick = onSeller, Modifier.fillMaxWidth().heightIn(min = 56.dp), shape = RoundedCornerShape(50), colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)) {
@@ -575,7 +600,7 @@ private fun OptionGroupRow(
         ) {
             group.options.forEach { option ->
                 ChoiceChip(
-                    label = listOfNotNull(option.emoji, option.label).joinToString(" "),
+                    option = option,
                     isSelected = option.id in selected,
                     multi = group.selection == OptionSelection.MULTIPLE,
                     onClick = { onToggle(option.id) }

@@ -162,6 +162,8 @@
     <!-- Home / Main -->
     <string name="home_location_placeholder">Tokoin, Lomé, Togo</string>
     <string name="home_search_placeholder">Riz, fufu, Tokoin, vendeur…</string>
+    <string name="home_greeting">Bonjour</string>
+    <string name="home_search_prompt">Qu\'est-ce que tu cherches ?</string>
     <string name="home_section_popular">Les plus populaires</string>
     <string name="home_section_nearby">Près de toi</string>
     <string name="home_see_all">Tout  →</string>

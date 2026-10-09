@@ -26,7 +26,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -146,9 +150,14 @@ fun HomeScreenContent(
         item {
             Column(modifier = Modifier.togoEnter()) {
                 Spacer(modifier = Modifier.height(12.dp))
-                LocationHeader(address = currentLocation)
-                Spacer(modifier = Modifier.height(10.dp))
-                SearchBar(onTap = onSearchClick)
+                HomeHeader(
+                    currentLocation = currentLocation,
+                    onLocationClick = { /* TODO: navigate to location picker */ },
+                    onSearchClick = onSearchClick,
+                    onProfileClick = { /* TODO: navigate to profile */ },
+                    onNotificationsClick = { /* TODO: navigate to notifications */ },
+                    onCartClick = { /* TODO: navigate to cart */ }
+                )
                 Spacer(modifier = Modifier.height(12.dp))
                 HomeCategoryRow(
                     categories = categories,
@@ -362,11 +371,13 @@ private fun FoodSection(
 }
 
 @Composable
-private fun LocationHeader(address: String) {
+private fun LocationHeader(address: String, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp),
+            .padding(horizontal = 16.dp, vertical = 4.dp)
+            .clickable { onClick() }
+            .background(MaterialTheme.colorScheme.surfaceContainerHighest),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -386,29 +397,75 @@ private fun LocationHeader(address: String) {
 }
 
 @Composable
-private fun SearchBar(onTap: () -> Unit = {}) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-            .clip(RoundedCornerShape(14.dp))
-            .background(MaterialTheme.colorScheme.surfaceContainerHighest)
-            .clickable { onTap() }
-            .padding(horizontal = 16.dp, vertical = 12.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(
-            Icons.Default.Search,
-            contentDescription = stringResource(R.string.cd_search),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.size(20.dp)
-        )
-        Spacer(modifier = Modifier.width(10.dp))
-        Text(
-            stringResource(R.string.home_search_placeholder),
-            fontSize = 15.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontWeight = FontWeight.Medium
-        )
+private fun HomeHeader(
+    currentLocation: String,
+    onLocationClick: () -> Unit,
+    onSearchClick: () -> Unit,
+    onProfileClick: () -> Unit,
+    onNotificationsClick: () -> Unit,
+    onCartClick: () -> Unit
+) {
+    Column {
+        // Top row: Greeting + Profile/Notifications/Cart
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column {
+                Text(
+                    text = stringResource(R.string.home_greeting),
+                    fontSize = 16.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = stringResource(R.string.home_search_prompt),
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                IconButton(onClick = onNotificationsClick) {
+                    Icon(Icons.Default.Notifications, contentDescription = "Notifications", tint = MaterialTheme.colorScheme.onSurface, modifier = Modifier.size(24.dp))
+                }
+                IconButton(onClick = onCartClick) {
+                    Icon(Icons.Default.ShoppingCart, contentDescription = "Panier", tint = MaterialTheme.colorScheme.onSurface, modifier = Modifier.size(24.dp))
+                }
+                IconButton(onClick = onProfileClick) {
+                    Icon(Icons.Default.Person, contentDescription = "Profil", tint = MaterialTheme.colorScheme.onSurface, modifier = Modifier.size(24.dp))
+                }
+            }
+        }
+
+        // Search bar
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .clip(RoundedCornerShape(14.dp))
+                .background(MaterialTheme.colorScheme.surfaceContainerHighest)
+                .clickable { onSearchClick() }
+                .padding(horizontal = 16.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                Icons.Default.Search,
+                contentDescription = stringResource(R.string.cd_search),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.size(20.dp)
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                stringResource(R.string.home_search_placeholder),
+                fontSize = 15.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                fontWeight = FontWeight.Medium
+            )
+        }
+
+        // Clickable location header
+        Spacer(modifier = Modifier.height(8.dp))
+        LocationHeader(address = currentLocation, onClick = onLocationClick)
     }
 }

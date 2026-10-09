@@ -39,6 +39,7 @@ import com.example.togofood.ui.components.LabeledTextField
 import com.example.togofood.ui.components.PhoneTextField
 import com.example.togofood.ui.components.PrimaryButton
 import com.example.togofood.ui.theme.togoEnter
+import androidx.compose.material3.MaterialTheme
 
 private val TextPrimary = Color(0xFF111111)
 private val TextSecondary = Color(0xFF666666)
@@ -64,13 +65,13 @@ fun SellerProfileEditScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(PageBg)
+            .background(MaterialTheme.colorScheme.background)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(CardBg)
+                .background(MaterialTheme.colorScheme.surface)
                 .padding(horizontal = 4.dp, vertical = 4.dp)
                 .togoEnter(),
             verticalAlignment = Alignment.CenterVertically
@@ -79,20 +80,20 @@ fun SellerProfileEditScreen(
                 Icon(
                     Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = stringResource(R.string.cd_back),
-                    tint = TextPrimary
+                    tint = MaterialTheme.colorScheme.onSurface
                 )
             }
             Text(
                 stringResource(R.string.seller_profile_edit_title),
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 18.sp,
-                color = TextPrimary,
+                color = MaterialTheme.colorScheme.onSurface,
             )
         }
 
         if (state.missingSession) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(stringResource(R.string.seller_hub_missing), color = TextSecondary)
+                Text(stringResource(R.string.seller_hub_missing), color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             return
         }

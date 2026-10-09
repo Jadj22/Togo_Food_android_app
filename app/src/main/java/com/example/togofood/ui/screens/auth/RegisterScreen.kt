@@ -162,7 +162,7 @@ fun RegisterScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.background)
             .padding(horizontal = 24.dp)
             .verticalScroll(rememberScrollState())
             .togoEnter()
@@ -398,10 +398,10 @@ private fun RoleCard(
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(text = emoji, fontSize = 16.sp)
             Spacer(modifier = Modifier.width(6.dp))
-            Text(text = label, fontWeight = FontWeight.Black, fontSize = 15.sp, color = Color.Black)
+            Text(text = label, fontWeight = FontWeight.Black, fontSize = 15.sp, color = MaterialTheme.colorScheme.onBackground)
         }
         Spacer(modifier = Modifier.height(4.dp))
-        Text(text = description, fontSize = 11.sp, color = Color.Gray, lineHeight = 14.sp)
+        Text(text = description, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 14.sp)
     }
 }
 
@@ -416,7 +416,7 @@ private fun RegisterTopBar(stepLabel: String, onBack: () -> Unit) {
             modifier = Modifier
                 .size(40.dp)
                 .clip(CircleShape)
-                .background(Color(0xFFF5F5F5))
+                .background(MaterialTheme.colorScheme.surfaceContainer)
                 .clickable { onBack() },
             contentAlignment = Alignment.Center
         ) {
@@ -451,12 +451,12 @@ private fun FormGreeting(title: String, subtitle: String, emoji: String) {
                 text = "$title ",
                 fontSize = 26.sp,
                 fontWeight = FontWeight.Black,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onBackground
             )
             Text(text = emoji, fontSize = 24.sp)
         }
         Spacer(modifier = Modifier.height(4.dp))
-        Text(text = subtitle, fontSize = 15.sp, color = Color.Gray, lineHeight = 22.sp)
+        Text(text = subtitle, fontSize = 15.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 22.sp)
     }
 }
 
@@ -471,7 +471,7 @@ private fun TermsCheckbox(checked: Boolean, onCheckedChange: (Boolean) -> Unit) 
         Text(
             text = stringResource(R.string.terms_accept),
             fontSize = 13.sp,
-            color = Color.DarkGray,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontWeight = FontWeight.Medium
         )
     }

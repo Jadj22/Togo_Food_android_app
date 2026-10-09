@@ -86,7 +86,7 @@ fun SellerHubScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(PageBg)
+            .background(MaterialTheme.colorScheme.background)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
         HubTopBar(onBackClick = onBackClick)
@@ -99,7 +99,7 @@ fun SellerHubScreen(
                 ) {
                     Text(
                         stringResource(R.string.seller_hub_missing),
-                        color = TextSecondary,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontSize = 15.sp,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.padding(32.dp)
@@ -186,7 +186,7 @@ fun SellerHubScreen(
                             Text(
                                 stringResource(R.string.seller_hub_prep_tap_edit),
                                 fontSize = 12.sp,
-                                color = SoftMuted,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 modifier = Modifier
                                     .padding(horizontal = PageHPadding)
                                     .padding(top = 4.dp, bottom = 10.dp)
@@ -225,7 +225,7 @@ private fun HubTopBar(onBackClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(CardBg)
+            .background(MaterialTheme.colorScheme.surface)
             .padding(horizontal = 4.dp, vertical = 4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -233,14 +233,14 @@ private fun HubTopBar(onBackClick: () -> Unit) {
             Icon(
                 Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = stringResource(R.string.cd_back),
-                tint = TextPrimary
+                tint = MaterialTheme.colorScheme.onSurface
             )
         }
         Text(
             stringResource(R.string.seller_hub_title),
             fontWeight = FontWeight.ExtraBold,
             fontSize = 18.sp,
-            color = TextPrimary,
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.weight(1f)
         )
     }
@@ -265,7 +265,7 @@ private fun HubDecisionHeader(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(CardBg)
+            .background(MaterialTheme.colorScheme.surface)
             .padding(bottom = 14.dp)
     ) {
         Row(
@@ -274,7 +274,7 @@ private fun HubDecisionHeader(
                 .padding(horizontal = PageHPadding)
                 .padding(top = 12.dp)
                 .clip(RoundedCornerShape(Radius))
-                .background(if (isOpen) OpenGreen.copy(alpha = 0.10f) else SurfaceBg)
+                .background(if (isOpen) MaterialTheme.colorScheme.tertiary.copy(alpha = 0.10f) else MaterialTheme.colorScheme.surfaceContainer)
                 .padding(horizontal = 16.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -293,7 +293,7 @@ private fun HubDecisionHeader(
                         else R.string.seller_hub_open_hint_closed
                     ),
                     fontSize = 12.sp,
-                    color = TextSecondary,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     lineHeight = 16.sp
                 )
             }
@@ -302,9 +302,9 @@ private fun HubDecisionHeader(
                 onCheckedChange = onOpenChange,
                 colors = SwitchDefaults.colors(
                     checkedThumbColor = Color.White,
-                    checkedTrackColor = OpenGreen,
+                    checkedTrackColor = MaterialTheme.colorScheme.tertiary,
                     uncheckedThumbColor = Color.White,
-                    uncheckedTrackColor = Color(0xFFBDBDBD),
+                    uncheckedTrackColor = MaterialTheme.colorScheme.outline,
                 )
             )
         }
@@ -335,7 +335,7 @@ private fun HubDecisionHeader(
                     seller.name,
                     fontWeight = FontWeight.ExtraBold,
                     fontSize = 20.sp,
-                    color = TextPrimary,
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -344,14 +344,14 @@ private fun HubDecisionHeader(
                     Icon(
                         Icons.Default.LocationOn,
                         contentDescription = null,
-                        tint = SoftMuted,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(14.dp)
                     )
                     Spacer(Modifier.width(4.dp))
                     Text(
                         stringResource(R.string.seller_zone_landmark, seller.zone, seller.landmark),
                         fontSize = 13.sp,
-                        color = SoftMuted,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -362,7 +362,7 @@ private fun HubDecisionHeader(
                         Icon(
                             Icons.Default.Star,
                             contentDescription = null,
-                            tint = StarGold,
+                            tint = MaterialTheme.colorScheme.tertiary,
                             modifier = Modifier.size(14.dp)
                         )
                         Spacer(Modifier.width(4.dp))
@@ -373,7 +373,7 @@ private fun HubDecisionHeader(
                                 seller.reviewCount
                             ),
                             fontSize = 12.sp,
-                            color = SoftMuted
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
@@ -382,7 +382,7 @@ private fun HubDecisionHeader(
                     Text(
                         stringResource(R.string.seller_hub_hours_line, scheduleSummary),
                         fontSize = 12.sp,
-                        color = SoftMuted,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -395,7 +395,7 @@ private fun HubDecisionHeader(
             Text(
                 seller.description,
                 fontSize = 13.sp,
-                color = SoftMuted,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 lineHeight = 18.sp,
@@ -417,20 +417,20 @@ private fun HubEmptyStockBanner(
             .padding(horizontal = PageHPadding)
             .padding(top = 12.dp)
             .clip(RoundedCornerShape(Radius))
-            .background(WarningBg)
+            .background(MaterialTheme.colorScheme.secondaryContainer)
             .padding(14.dp)
     ) {
         Text(
             stringResource(R.string.seller_hub_empty_stock_title),
             fontWeight = FontWeight.ExtraBold,
             fontSize = 14.sp,
-            color = WarningInk
+            color = MaterialTheme.colorScheme.secondary
         )
         Spacer(Modifier.height(4.dp))
         Text(
             stringResource(R.string.seller_hub_empty_stock_body),
             fontSize = 13.sp,
-            color = TextSecondary,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             lineHeight = 18.sp
         )
         Spacer(Modifier.height(10.dp))
@@ -455,7 +455,7 @@ private fun HubActionChips(
         modifier = modifier
             .fillMaxWidth()
             .padding(top = 12.dp)
-            .background(CardBg)
+            .background(MaterialTheme.colorScheme.surface)
             .horizontalScroll(rememberScrollState())
             .padding(horizontal = PageHPadding, vertical = 12.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -480,7 +480,7 @@ private fun ActionChip(label: String, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(Radius))
-            .background(SurfaceBg)
+            .background(MaterialTheme.colorScheme.surfaceContainer)
             .clickable(onClick = onClick)
             .padding(horizontal = 14.dp, vertical = 10.dp)
     ) {
@@ -488,7 +488,7 @@ private fun ActionChip(label: String, onClick: () -> Unit) {
             label,
             fontSize = 13.sp,
             fontWeight = FontWeight.Bold,
-            color = TextPrimary
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }
@@ -513,7 +513,7 @@ private fun HubPrepsHeader(
                 stringResource(R.string.seller_hub_preps_title),
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 17.sp,
-                color = TextPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
             if (totalCount > 0) {
                 Text(
@@ -523,7 +523,7 @@ private fun HubPrepsHeader(
                         stringResource(R.string.seller_hub_preps_shown, shownCount, totalCount)
                     },
                     fontSize = 12.sp,
-                    color = SoftMuted
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
@@ -567,7 +567,7 @@ private fun HubLayoutToggle(
     Row(
         modifier = Modifier
             .clip(RoundedCornerShape(Radius))
-            .background(SurfaceBg)
+            .background(MaterialTheme.colorScheme.surfaceContainer)
             .padding(3.dp),
         horizontalArrangement = Arrangement.spacedBy(2.dp)
     ) {
@@ -688,7 +688,7 @@ private fun HubFilterEmpty(
             stringResource(R.string.seller_hub_filter_empty),
             fontWeight = FontWeight.Bold,
             fontSize = 15.sp,
-            color = TextPrimary,
+            color = MaterialTheme.colorScheme.onSurface,
             textAlign = TextAlign.Center
         )
         Spacer(Modifier.height(12.dp))
@@ -717,7 +717,7 @@ private fun HubEmptyPreps(
             modifier = Modifier
                 .size(72.dp)
                 .clip(RoundedCornerShape(Radius))
-                .background(Color(0xFFFFF3E8)),
+                .background(MaterialTheme.colorScheme.primaryContainer),
             contentAlignment = Alignment.Center
         ) {
             Icon(
@@ -732,14 +732,14 @@ private fun HubEmptyPreps(
             stringResource(R.string.seller_hub_preps_empty),
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp,
-            color = TextPrimary,
+            color = MaterialTheme.colorScheme.onSurface,
             textAlign = TextAlign.Center
         )
         Spacer(Modifier.height(8.dp))
         Text(
             stringResource(R.string.seller_hub_preps_empty_hint),
             fontSize = 14.sp,
-            color = TextSecondary,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
             lineHeight = 20.sp
         )
@@ -787,7 +787,7 @@ private fun HubPrepListRow(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(Radius))
-            .background(CardBg)
+            .background(MaterialTheme.colorScheme.surface)
             .clickable(onClick = onClick)
             .padding(12.dp)
             .alpha(if (available) 1f else 0.6f),
@@ -810,7 +810,7 @@ private fun HubPrepListRow(
                 preparation.name,
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 15.sp,
-                color = TextPrimary,
+                color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
@@ -819,7 +819,7 @@ private fun HubPrepListRow(
                 stringResource(R.string.card_price_from, preparation.basePrice.formatFcfa()),
                 fontSize = 13.sp,
                 fontWeight = FontWeight.Bold,
-                color = OpenGreen
+                color = MaterialTheme.colorScheme.tertiary
             )
             Text(
                 stringResource(
@@ -836,9 +836,9 @@ private fun HubPrepListRow(
             onCheckedChange = onToggle,
             colors = SwitchDefaults.colors(
                 checkedThumbColor = Color.White,
-                checkedTrackColor = OpenGreen,
+                checkedTrackColor = MaterialTheme.colorScheme.tertiary,
                 uncheckedThumbColor = Color.White,
-                uncheckedTrackColor = Color(0xFFBDBDBD),
+                uncheckedTrackColor = MaterialTheme.colorScheme.outline,
             )
         )
     }
@@ -907,7 +907,7 @@ private fun HubPrepCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(Radius))
-                .background(SurfaceBg)
+                .background(MaterialTheme.colorScheme.surfaceContainer)
                 .padding(horizontal = 10.dp, vertical = 4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -926,9 +926,9 @@ private fun HubPrepCard(
                 onCheckedChange = onToggle,
                 colors = SwitchDefaults.colors(
                     checkedThumbColor = Color.White,
-                    checkedTrackColor = OpenGreen,
+                    checkedTrackColor = MaterialTheme.colorScheme.tertiary,
                     uncheckedThumbColor = Color.White,
-                    uncheckedTrackColor = Color(0xFFBDBDBD),
+                    uncheckedTrackColor = MaterialTheme.colorScheme.outline,
                 )
             )
         }

@@ -3,6 +3,7 @@ package com.example.togofood.ui.screens.preparation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.togofood.data.mock.MockData
 import com.example.togofood.data.repository.CatalogRepository
 import com.example.togofood.data.repository.MockPreparationRepository
 import com.example.togofood.data.repository.MockSellerRepository
@@ -12,7 +13,6 @@ import com.example.togofood.domain.model.Preparation
 import com.example.togofood.domain.model.Seller
 import com.example.togofood.ui.components.OptionSelection
 import com.example.togofood.ui.components.RequestOptionGroup
-import com.example.togofood.ui.components.RequestOptions
 import com.example.togofood.ui.components.buildRequestMessage
 import com.example.togofood.ui.components.formatFcfa
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -53,6 +53,7 @@ data class CustomRequestState(
 ) {
     val choiceCount: Int get() = selections.values.sumOf { it.size }
     val isPersonalized: Boolean get() = choiceCount > 0 || isMessageEdited
+    val extraTotal: Int get() = groups.flatMap { it.options }.filter { it.id in selections.flatMap { it.value } }.sumOf { it.extraPrice }
 }
 
 class PreparationDetailViewModel(
@@ -170,7 +171,7 @@ class PreparationDetailViewModel(
 
     private fun resetRequest() {
         _request.value = CustomRequestState(
-            groups = currentPrep?.let { RequestOptions.groupsFor(it) }.orEmpty()
+            groups = currentPrep?.let { MockData.customOptionsFor(it.uuid) }.orEmpty()
         )
         refreshMessage()
     }

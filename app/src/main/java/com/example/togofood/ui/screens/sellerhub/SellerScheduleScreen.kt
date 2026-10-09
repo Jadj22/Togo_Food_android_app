@@ -74,13 +74,13 @@ fun SellerScheduleScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(PageBg)
+            .background(MaterialTheme.colorScheme.background)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(CardBg)
+                .background(MaterialTheme.colorScheme.surface)
                 .padding(horizontal = 4.dp, vertical = 4.dp)
                 .togoEnter(),
             verticalAlignment = Alignment.CenterVertically
@@ -89,20 +89,20 @@ fun SellerScheduleScreen(
                 Icon(
                     Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = stringResource(R.string.cd_back),
-                    tint = TextPrimary
+                    tint = MaterialTheme.colorScheme.onSurface
                 )
             }
             Text(
                 stringResource(R.string.seller_schedule_title),
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 18.sp,
-                color = TextPrimary,
+                color = MaterialTheme.colorScheme.onSurface,
             )
         }
 
         if (state.missingSession) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(stringResource(R.string.seller_hub_missing), color = TextSecondary)
+                Text(stringResource(R.string.seller_hub_missing), color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             return
         }
@@ -118,7 +118,7 @@ fun SellerScheduleScreen(
             Text(
                 stringResource(R.string.seller_schedule_hint),
                 fontSize = 13.sp,
-                color = TextSecondary,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 lineHeight = 18.sp
             )
             Spacer(Modifier.height(16.dp))
@@ -163,7 +163,7 @@ private fun DayScheduleCard(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
-            .background(CardBg)
+            .background(MaterialTheme.colorScheme.surface)
             .padding(14.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -172,7 +172,7 @@ private fun DayScheduleCard(
                     dayLabel(day.dayOfWeek),
                     fontWeight = FontWeight.Bold,
                     fontSize = 15.sp,
-                    color = TextPrimary
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
                     stringResource(
@@ -180,7 +180,7 @@ private fun DayScheduleCard(
                         else R.string.seller_schedule_closed_day
                     ),
                     fontSize = 12.sp,
-                    color = TextSecondary
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             Switch(
@@ -188,9 +188,9 @@ private fun DayScheduleCard(
                 onCheckedChange = onOpenChange,
                 colors = SwitchDefaults.colors(
                     checkedThumbColor = Color.White,
-                    checkedTrackColor = Color(0xFF2F9E44),
+                    checkedTrackColor = MaterialTheme.colorScheme.tertiary,
                     uncheckedThumbColor = Color.White,
-                    uncheckedTrackColor = Color(0xFFBDBDBD),
+                    uncheckedTrackColor = MaterialTheme.colorScheme.outline,
                 )
             )
         }
@@ -233,7 +233,7 @@ private fun SlotEditor(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
-            .background(SurfaceBg)
+            .background(MaterialTheme.colorScheme.surfaceContainer)
             .padding(12.dp)
     ) {
         Row(
@@ -247,7 +247,7 @@ private fun SlotEditor(
                 range = 0..22,
                 onChange = onOpenHourChange,
             )
-            Text("→", color = TextSecondary, fontWeight = FontWeight.Bold)
+            Text("→", color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Bold)
             HourStepper(
                 label = stringResource(R.string.seller_schedule_close_hour),
                 hour = slot.closeHour,
@@ -259,7 +259,7 @@ private fun SlotEditor(
             TextButton(onClick = onRemove) {
                 Text(
                     stringResource(R.string.seller_schedule_remove_slot),
-                    color = TextSecondary,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontSize = 12.sp
                 )
             }
@@ -275,7 +275,7 @@ private fun HourStepper(
     onChange: (Int) -> Unit,
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(label, fontSize = 11.sp, color = TextSecondary)
+        Text(label, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Spacer(Modifier.height(4.dp))
         Row(verticalAlignment = Alignment.CenterVertically) {
             TextButton(
@@ -288,7 +288,7 @@ private fun HourStepper(
                 "${hour}h",
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
-                color = TextPrimary,
+                color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.width(40.dp),
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center
             )

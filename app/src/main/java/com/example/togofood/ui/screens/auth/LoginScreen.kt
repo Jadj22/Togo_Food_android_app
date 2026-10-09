@@ -61,7 +61,7 @@ fun LoginScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.background)
             .verticalScroll(rememberScrollState())
     ) {
         LoginHeader()
@@ -180,7 +180,7 @@ private fun LoginGreeting() {
             text = stringResource(R.string.login_greeting_title),
             fontSize = 26.sp,
             fontWeight = FontWeight.ExtraBold,
-            color = Color.Black
+            color = MaterialTheme.colorScheme.onBackground
         )
         Spacer(Modifier.width(8.dp))
         Text(text = "👋", fontSize = 24.sp)
@@ -190,7 +190,7 @@ private fun LoginGreeting() {
 @Composable
 private fun RegisterPrompt(onNavigateToRegister: () -> Unit) {
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-        Text(text = stringResource(R.string.register_prompt), color = Color.Gray, fontSize = 15.sp)
+        Text(text = stringResource(R.string.register_prompt), color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 15.sp)
         Spacer(Modifier.width(4.dp))
         Text(
             text = stringResource(R.string.register_link),

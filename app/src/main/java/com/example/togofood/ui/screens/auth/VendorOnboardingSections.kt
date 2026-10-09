@@ -180,13 +180,13 @@ fun MotivAutoCarousel(
                         stringResource(slide.titleRes),
                         fontWeight = FontWeight.ExtraBold,
                         fontSize = 14.sp,
-                        color = TextPrimary
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     Spacer(Modifier.height(2.dp))
                     Text(
                         stringResource(slide.bodyRes),
                         fontSize = 12.sp,
-                        color = TextSecondary,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         lineHeight = 16.sp,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis
@@ -286,7 +286,7 @@ fun VendorAccountStep(
         Text(
             stringResource(R.string.vendor_onboarding_whatsapp_hint),
             fontSize = 12.sp,
-            color = TextSecondary,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             lineHeight = 17.sp
         )
     }
@@ -335,13 +335,13 @@ fun VendorShopStep(
             stringResource(R.string.vendor_onboarding_specialty_label),
             fontWeight = FontWeight.SemiBold,
             fontSize = 14.sp,
-            color = TextPrimary
+            color = MaterialTheme.colorScheme.onSurface
         )
         Spacer(Modifier.height(6.dp))
         Text(
             stringResource(R.string.vendor_onboarding_specialty_hint),
             fontSize = 12.sp,
-            color = TextSecondary
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Spacer(Modifier.height(10.dp))
         Row(
@@ -431,7 +431,7 @@ fun VendorLocationStep(
         Text(
             stringResource(R.string.vendor_onboarding_location_note),
             fontSize = 12.sp,
-            color = TextSecondary,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             lineHeight = 17.sp
         )
     }
@@ -461,7 +461,7 @@ fun VendorScheduleStep(
             stringResource(R.string.vendor_onboarding_preset_label),
             fontWeight = FontWeight.SemiBold,
             fontSize = 14.sp,
-            color = TextPrimary
+            color = MaterialTheme.colorScheme.onSurface
         )
         Spacer(Modifier.height(10.dp))
         Row(
@@ -489,7 +489,7 @@ fun VendorScheduleStep(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(14.dp))
-                .background(SurfaceBg)
+                .background(MaterialTheme.colorScheme.surfaceContainer)
                 .padding(vertical = 8.dp),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
@@ -500,7 +500,7 @@ fun VendorScheduleStep(
                 onMinus = { onOpenHourChange(openHour - 1) },
                 onPlus = { onOpenHourChange(openHour + 1) },
             )
-            Text("→", fontWeight = FontWeight.Bold, color = TextSecondary)
+            Text("→", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurfaceVariant)
             HourControl(
                 label = stringResource(R.string.seller_schedule_close_hour),
                 hour = closeHour,
@@ -540,7 +540,7 @@ fun VendorScheduleStep(
         }
         if (scheduleError != null) {
             Spacer(Modifier.height(10.dp))
-            Text(stringResource(scheduleError), color = Color(0xFFC62828), fontSize = 12.sp)
+            Text(stringResource(scheduleError), color = MaterialTheme.colorScheme.error, fontSize = 12.sp)
         }
     }
 }
@@ -613,7 +613,7 @@ fun VendorReviewStep(
                             shopName.ifBlank { "—" },
                             fontWeight = FontWeight.ExtraBold,
                             fontSize = 20.sp,
-                            color = TextPrimary,
+                            color = MaterialTheme.colorScheme.onSurface,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -623,7 +623,7 @@ fun VendorReviewStep(
                 Text(
                     description.ifBlank { "—" },
                     fontSize = 13.sp,
-                    color = TextSecondary,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     lineHeight = 18.sp,
                     maxLines = 3,
                     overflow = TextOverflow.Ellipsis
@@ -637,7 +637,7 @@ fun VendorReviewStep(
                 Text(
                     "$landmark · $scheduleSummary",
                     fontSize = 12.sp,
-                    color = TextSecondary,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -650,7 +650,7 @@ fun VendorReviewStep(
             stringResource(R.string.vendor_onboarding_review_next_title),
             fontWeight = FontWeight.ExtraBold,
             fontSize = 15.sp,
-            color = TextPrimary,
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.togoEnter(delayMs = 80)
         )
         Spacer(Modifier.height(10.dp))
@@ -671,7 +671,7 @@ fun VendorReviewStep(
             stringResource(R.string.vendor_onboarding_review_summary),
             fontWeight = FontWeight.ExtraBold,
             fontSize = 15.sp,
-            color = TextPrimary,
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.togoEnter(delayMs = 160)
         )
         Spacer(Modifier.height(10.dp))
@@ -725,7 +725,7 @@ fun VendorReviewStep(
                 stringResource(R.string.vendor_onboarding_review_ready),
                 fontSize = 13.sp,
                 fontWeight = FontWeight.SemiBold,
-                color = SoftGreenText,
+                color = MaterialTheme.colorScheme.tertiary,
                 lineHeight = 18.sp,
                 modifier = Modifier.weight(1f)
             )
@@ -783,14 +783,14 @@ fun VendorReviewStep(
             Text(
                 stringResource(R.string.vendor_onboarding_terms),
                 fontSize = 13.sp,
-                color = TextPrimary,
+                color = MaterialTheme.colorScheme.onSurface,
                 lineHeight = 18.sp,
                 modifier = Modifier.weight(1f)
             )
         }
         if (termsError != null) {
             Spacer(Modifier.height(6.dp))
-            Text(stringResource(termsError), color = Color(0xFFC62828), fontSize = 12.sp)
+            Text(stringResource(termsError), color = MaterialTheme.colorScheme.error, fontSize = 12.sp)
         }
     }
 }
@@ -800,14 +800,14 @@ private fun PreviewChip(text: String) {
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(20.dp))
-            .background(SurfaceBg)
+            .background(MaterialTheme.colorScheme.surfaceContainer)
             .padding(horizontal = 10.dp, vertical = 5.dp)
     ) {
         Text(
             text,
             fontSize = 11.sp,
             fontWeight = FontWeight.SemiBold,
-            color = TextPrimary,
+            color = MaterialTheme.colorScheme.onSurface,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
@@ -825,7 +825,7 @@ private fun SummaryCard(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
-            .background(SurfaceBg)
+            .background(MaterialTheme.colorScheme.surfaceContainer)
             .padding(14.dp)
             .togoEnter(delayMs = delayMs),
         verticalAlignment = Alignment.Top
@@ -848,7 +848,7 @@ private fun SummaryCard(
                     line,
                     fontSize = 13.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = TextPrimary,
+                    color = MaterialTheme.colorScheme.onSurface,
                     lineHeight = 17.sp,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
@@ -879,7 +879,7 @@ private fun HourControl(
     onPlus: () -> Unit,
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(label, fontSize = 11.sp, color = TextSecondary)
+        Text(label, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Row(verticalAlignment = Alignment.CenterVertically) {
             TextButton(onClick = onMinus) {
                 Text("−", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
@@ -897,7 +897,7 @@ private fun HourControl(
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
                     modifier = Modifier.width(44.dp),
-                    color = TextPrimary
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
             TextButton(onClick = onPlus) {

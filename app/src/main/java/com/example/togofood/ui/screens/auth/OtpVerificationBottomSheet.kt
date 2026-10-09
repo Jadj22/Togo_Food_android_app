@@ -100,7 +100,7 @@ fun OtpVerificationBottomSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
-        containerColor = Color.White,
+        containerColor = MaterialTheme.colorScheme.surface,
         shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
     ) {
         Column(
@@ -115,13 +115,13 @@ fun OtpVerificationBottomSheet(
                 text = stringResource(R.string.otp_title),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onBackground
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = stringResource(R.string.otp_subtitle),
                 fontSize = 14.sp,
-                color = Color.Gray,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center
             )
             Text(
@@ -136,7 +136,7 @@ fun OtpVerificationBottomSheet(
             if (errorMessage != null) {
                 Text(
                     text = errorMessage,
-                    color = Color.Red,
+                    color = MaterialTheme.colorScheme.error,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium,
                     modifier = Modifier.padding(bottom = 12.dp)
@@ -184,7 +184,7 @@ private fun OtpHeaderIcon() {
     Box(
         modifier = Modifier
             .size(64.dp)
-            .background(color = Color(0xFFFBE9E7), shape = CircleShape),
+            .background(color = MaterialTheme.colorScheme.primaryContainer, shape = CircleShape),
         contentAlignment = Alignment.Center
     ) {
         Icon(
@@ -263,7 +263,7 @@ private fun OtpDigitBox(
             text = digit,
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.Black,
+            color = MaterialTheme.colorScheme.onBackground,
             textAlign = TextAlign.Center
         )
     }
@@ -274,7 +274,7 @@ private fun ResendCodeRow(secondsLeft: Int, onResend: () -> Unit) {
     if (secondsLeft > 0) {
         val formatted = "%02d:%02d".format(secondsLeft / 60, secondsLeft % 60)
         Row {
-            Text(text = stringResource(R.string.resend_code_in), fontSize = 13.sp, color = Color.Gray)
+            Text(text = stringResource(R.string.resend_code_in), fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Text(
                 text = formatted,
                 fontSize = 13.sp,

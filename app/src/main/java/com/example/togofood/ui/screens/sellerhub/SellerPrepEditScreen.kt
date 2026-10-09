@@ -91,7 +91,7 @@ fun SellerPrepEditScreen(
             text = { Text(stringResource(R.string.seller_prep_delete_confirm_message)) },
             confirmButton = {
                 TextButton(onClick = viewModel::confirmDelete) {
-                    Text(stringResource(R.string.seller_prep_delete_confirm), color = Color(0xFFC62828))
+                    Text(stringResource(R.string.seller_prep_delete_confirm), color = MaterialTheme.colorScheme.error)
                 }
             },
             dismissButton = {
@@ -105,13 +105,13 @@ fun SellerPrepEditScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(PageBg)
+            .background(MaterialTheme.colorScheme.background)
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(CardBg)
+                .background(MaterialTheme.colorScheme.surface)
                 .padding(horizontal = 4.dp, vertical = 4.dp)
                 .togoEnter(),
             verticalAlignment = Alignment.CenterVertically
@@ -120,7 +120,7 @@ fun SellerPrepEditScreen(
                 Icon(
                     Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = stringResource(R.string.cd_back),
-                    tint = TextPrimary
+                    tint = MaterialTheme.colorScheme.onSurface
                 )
             }
             Text(
@@ -130,13 +130,13 @@ fun SellerPrepEditScreen(
                 ),
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 18.sp,
-                color = TextPrimary,
+                color = MaterialTheme.colorScheme.onSurface,
             )
         }
 
         if (state.missingSession) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(stringResource(R.string.seller_hub_missing), color = TextSecondary)
+                Text(stringResource(R.string.seller_hub_missing), color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             return
         }
@@ -166,7 +166,7 @@ fun SellerPrepEditScreen(
                 Text(
                     stringResource(R.string.seller_prep_photo_hint),
                     fontSize = 13.sp,
-                    color = TextSecondary,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -193,7 +193,7 @@ fun SellerPrepEditScreen(
                 stringResource(R.string.seller_prep_category_label),
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 14.sp,
-                color = TextPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(Modifier.height(10.dp))
             Row(
@@ -205,7 +205,7 @@ fun SellerPrepEditScreen(
                     Row(
                         modifier = Modifier
                             .clip(RoundedCornerShape(20.dp))
-                            .background(if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.12f) else SurfaceBg)
+                            .background(if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.12f) else MaterialTheme.colorScheme.surfaceContainer)
                             .then(
                                 if (selected) Modifier.border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(20.dp))
                                 else Modifier
@@ -244,13 +244,13 @@ fun SellerPrepEditScreen(
                 stringResource(R.string.seller_prep_variants_title),
                 fontWeight = FontWeight.Bold,
                 fontSize = 15.sp,
-                color = TextPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
             if (state.variantsError != null) {
                 Spacer(Modifier.height(6.dp))
                 Text(
                     stringResource(state.variantsError!!),
-                    color = Color(0xFFC62828),
+                    color = MaterialTheme.colorScheme.error,
                     fontSize = 12.sp
                 )
             }
@@ -292,7 +292,7 @@ fun SellerPrepEditScreen(
                 ) {
                     Text(
                         stringResource(R.string.seller_prep_delete),
-                        color = Color(0xFFC62828),
+                        color = MaterialTheme.colorScheme.error,
                         fontWeight = FontWeight.SemiBold
                     )
                 }
@@ -312,11 +312,11 @@ private fun ToggleRow(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
-            .background(CardBg)
+            .background(MaterialTheme.colorScheme.surface)
             .padding(horizontal = 14.dp, vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(label, modifier = Modifier.weight(1f), fontSize = 14.sp, color = TextPrimary)
+        Text(label, modifier = Modifier.weight(1f), fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface)
         Switch(
             checked = checked,
             onCheckedChange = onCheckedChange,
@@ -324,7 +324,7 @@ private fun ToggleRow(
                 checkedThumbColor = Color.White,
                 checkedTrackColor = MaterialTheme.colorScheme.primary,
                 uncheckedThumbColor = Color.White,
-                uncheckedTrackColor = Color(0xFFBDBDBD),
+                uncheckedTrackColor = MaterialTheme.colorScheme.outline,
             )
         )
     }
@@ -342,7 +342,7 @@ private fun VariantEditorRow(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
-            .background(CardBg)
+            .background(MaterialTheme.colorScheme.surface)
             .padding(14.dp)
     ) {
         Row(verticalAlignment = Alignment.Top) {
@@ -359,7 +359,7 @@ private fun VariantEditorRow(
                     Icon(
                         Icons.Default.Close,
                         contentDescription = stringResource(R.string.seller_prep_remove_variant),
-                        tint = TextSecondary,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
             }
