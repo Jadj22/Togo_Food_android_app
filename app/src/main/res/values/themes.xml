@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Thème de LANCEMENT. Il doit être appliqué à l'activité de démarrage via
+        android:theme dans le manifest : sur API 31+, core-splashscreen recopie
+        ces attributs windowSplashScreen* vers leurs équivalents
+        android:windowSplashScreen* (cf. res/values-v31 de la bibliothèque).
+        Sans ce thème sur l'activité, l'API SplashScreen d'Android 12+ retombe
+        sur ses valeurs par défaut (icône launcher sur ?android:colorBackground).
+
+        postSplashScreenTheme est indispensable : sa valeur par défaut est
+        ?android:attr/theme, donc sans lui l'activité conserverait ce thème.
+    -->
+    <style name="Theme.TogoFood" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#E65100</item>
+        <!-- Icône animée : vapeur qui monte (800ms, jouée 1x sur API 31+). -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo_anim</item>
+        <item name="windowSplashScreenAnimationDuration">800</item>
+        <item name="postSplashScreenTheme">@style/Theme.TogoFood.Main</item>
+    </style>
+
+    <!--
+        Thème applicatif, appliqué par installSplashScreen() à la fin du splash.
+        Volontairement en clair : l'UI Compose utilise des couleurs codées en dur
+        (Color.White, 0xFFE65100) et ne suit donc pas le mode sombre.
+    -->
+    <style name="Theme.TogoFood.Main" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>

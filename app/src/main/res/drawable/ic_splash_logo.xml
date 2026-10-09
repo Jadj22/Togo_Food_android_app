@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Logo de lancement TogoFood : un bol fumant, blanc sur le orange #E65100.
+
+    NE PAS remplacer par @mipmap/ic_launcher : sur API < 31 la bibliothèque
+    core-splashscreen affiche l'icône à 288dp puis masque tout sauf un cercle
+    central de 192dp (2/3). Une adaptive icon y serait "cropped and scaled"
+    (cf. KDoc de androidx.core.splashscreen.SplashScreen).
+
+    Toutes les formes tiennent donc dans un cercle de 72dp de diamètre
+    (rayon 36) centré sur (54,54), soit 2/3 du viewport 108x108.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Vapeur -->
+    <path
+        android:pathData="M42,42 C36,36 48,32 42,24"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="5"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M54,44 C48,38 60,34 54,24"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="5"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M66,42 C60,36 72,32 66,24"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="5"
+        android:strokeLineCap="round" />
+
+    <!-- Bol -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M28,50 L80,50 L73,74 C72,78 68,80 64,80 L44,80 C40,80 36,78 35,74 Z" />
+</vector>

@@ -1,0 +1,32 @@
+```gitignore
+# Android Studio
+*.iml
+.idea/
+!.idea/codeStyles/
+!.idea/inspectionProfiles/
+
+# Gradle
+.gradle/
+.gradle-home/
+build/
+**/build/
+
+# Configuration locale Android
+local.properties
+
+# Fichiers natifs générés
+.externalNativeBuild/
+.cxx/
+
+# APK et fichiers compilés
+*.apk
+*.aab
+
+# Captures et fichiers système
+captures/
+.DS_Store
+Thumbs.db
+
+# Règles spécifiques à Cursor et Codacy
+.cursor/rules/codacy.mdc
+```

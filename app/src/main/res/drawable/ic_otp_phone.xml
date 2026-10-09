@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Phone check / verification icon -->
+    <path
+        android:fillColor="#E65100"
+        android:pathData="M6.62,10.79c1.44,2.83 3.76,5.15 6.59,6.59l2.2,-2.2c0.27,-0.27 0.67,-0.36 1.02,-0.24 1.12,0.37 2.33,0.57 3.57,0.57 0.55,0 1,0.45 1,1V20c0,0.55 -0.45,1 -1,1 -9.39,0 -17,-7.61 -17,-17 0,-0.55 0.45,-1 1,-1h3.5c0.55,0 1,0.45 1,1 0,1.25 0.2,2.45 0.57,3.57 0.11,0.35 0.03,0.74 -0.24,1.02L6.62,10.79z" />
+    <!-- Check mark overlay -->
+    <path
+        android:fillColor="#E65100"
+        android:pathData="M16.5,3C14.01,3 12,5.01 12,7.5S14.01,12 16.5,12 21,9.99 21,7.5 18.99,3 16.5,3zM15.5,10L13,7.5l0.71,-0.71 1.79,1.78 3.79,-3.78 0.71,0.71L15.5,10z" />
+</vector>

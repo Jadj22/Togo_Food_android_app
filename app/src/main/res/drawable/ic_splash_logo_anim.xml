@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Icône animée du splash TogoFood : la vapeur monte pendant 800ms.
+    Joué UNE fois au lancement sur API 31+, statique sur API 26-30.
+    Durée max autorisée par le système : 1000ms.
+-->
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_splash_logo_animatable">
+    <target
+        android:name="steam"
+        android:animation="@animator/steam_set" />
+</animated-vector>

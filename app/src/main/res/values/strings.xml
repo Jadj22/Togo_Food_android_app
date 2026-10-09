@@ -1,0 +1,414 @@
+<resources>
+    <string name="app_name">TogoFood</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_discover">Découvrir</string>
+    <string name="nav_search">Chercher</string>
+    <string name="nav_favorites">Favoris</string>
+    <string name="nav_account">Compte</string>
+    <string name="nav_vendor_badge">Boutique</string>
+
+    <!-- General Login / Auth -->
+    <string name="login_greeting_title">Bon retour parmi nous ! </string>
+    <string name="login_greeting_subtitle">Connectez-vous pour découvrir ce qui se cuisine autour de vous.</string>
+    <string name="phone_label">Téléphone</string>
+    <string name="phone_placeholder">90 12 34 56</string>
+    <string name="password_label">Mot de passe</string>
+    <string name="password_placeholder">••••••••</string>
+    <string name="forgot_password">Mot de passe oublié ?</string>
+    <string name="login_button">Se connecter</string>
+    <string name="or_continue_with"> Ou continuer avec </string>
+    <string name="register_prompt">Pas encore de compte ? </string>
+    <string name="register_link">S\'inscrire</string>
+    
+    <!-- Validation Errors -->
+    <string name="error_phone_invalid">Le numéro doit comporter 8 chiffres</string>
+    <string name="error_password_short">Le mot de passe doit contenir au moins 6 caractères</string>
+    <string name="error_required_field">Ce champ est requis</string>
+
+    <!-- Registration -->
+    <string name="step_1_1">Étape 1/1</string>
+    <string name="step_1_2">Étape 1/2</string>
+    <string name="step_2_2">Étape 2/2</string>
+    
+    <string name="role_client_label">Client</string>
+    <string name="role_client_desc">Je cherche du bon miam</string>
+    <string name="role_vendor_label">Vendeur</string>
+    <string name="role_vendor_desc">Je vends mes préparations</string>
+    
+    <string name="register_client_title">Créer un compte</string>
+    <string name="register_client_subtitle">Rejoignez la communauté gourmande de Lomé.</string>
+    
+    <string name="register_vendor_title">Créer votre boutique</string>
+    <string name="register_vendor_subtitle">Digitalisez votre activité et soyez visible auprès des gourmands de Lomé.</string>
+    <string name="register_vendor_context">En choisissant Vendeur, vous allez créer vos identifiants puis configurer votre boutique.</string>
+    
+    <string name="register_vendor_step2_title">Votre boutique</string>
+    <string name="register_vendor_step2_subtitle">Décrivez votre espace de vente pour attirer les clients.</string>
+
+    <!-- Vendor onboarding (5 étapes) -->
+    <string name="vendor_onboarding_step_of">Étape %1$d/%2$d</string>
+    <string name="vendor_onboarding_continue">Continuer</string>
+    <string name="vendor_onboarding_continue_verify">Vérifier mon numéro</string>
+    <string name="vendor_onboarding_launch">Lancer ma boutique</string>
+
+    <string name="vendor_onboarding_account_tip">Ce numéro WhatsApp est celui que les clients utiliseront pour t\'écrire ou t\'appeler. Choisis ton numéro pro.</string>
+    <string name="vendor_onboarding_whatsapp_hint">Astuce : un numéro joignable vite = plus de commandes. Les clients te contactent directement.</string>
+    <string name="vendor_onboarding_account_slide1_title">WhatsApp = caisse</string>
+    <string name="vendor_onboarding_account_slide1_body">Les commandes arrivent en message. Réponds vite, tu vends plus.</string>
+    <string name="vendor_onboarding_account_slide2_title">Numéro pro</string>
+    <string name="vendor_onboarding_account_slide2_body">Utilise le numéro que tu as toujours sur toi en cuisine.</string>
+    <string name="vendor_onboarding_account_slide3_title">Confiance client</string>
+    <string name="vendor_onboarding_account_slide3_body">Un vrai numéro joignable rassure dès le premier contact.</string>
+
+    <string name="vendor_onboarding_shop_title">Ta boutique</string>
+    <string name="vendor_onboarding_shop_subtitle">Nom, spécialité et description — c\'est ce que les gourmands verront en premier.</string>
+    <string name="vendor_onboarding_shop_tip">Un nom clair + une description appétissante aident les clients à te choisir parmi les autres vendeurs du quartier.</string>
+    <string name="vendor_onboarding_desc_placeholder">Ex: Sauce arachide, fufu frais et riz tous les midis près du marché…</string>
+    <string name="vendor_onboarding_specialty_label">Spécialité principale</string>
+    <string name="vendor_onboarding_specialty_hint">Choisis la catégorie qui représente le mieux ce que tu vends.</string>
+    <string name="vendor_onboarding_shop_slide1_title">Nom qui claque</string>
+    <string name="vendor_onboarding_shop_slide1_body">« Chez Ama » ou « Maquis Tokoin » — simple et mémorable.</string>
+    <string name="vendor_onboarding_shop_slide2_title">Fais saliver</string>
+    <string name="vendor_onboarding_shop_slide2_body">Décris ce qui sort de ta cuisine, pas un texte corporate.</string>
+    <string name="vendor_onboarding_shop_slide3_title">Ta spécialité</string>
+    <string name="vendor_onboarding_shop_slide3_body">Les clients filtrent par catégorie. Choisis la bonne.</string>
+
+    <string name="vendor_onboarding_location_title">Où te trouver ?</string>
+    <string name="vendor_onboarding_location_subtitle">À Lomé, le quartier et un repère concret valent mieux qu\'une adresse GPS.</string>
+    <string name="vendor_onboarding_location_tip">Les clients viennent souvent à pied ou en zem. Indique un repère connu (marché, école, carrefour…).</string>
+    <string name="vendor_onboarding_find_hint_label">Comment te trouver facilement</string>
+    <string name="vendor_onboarding_find_hint_placeholder">Ex: Derrière la station Total, boutique bleue à droite</string>
+    <string name="vendor_onboarding_location_note">Ces infos apparaissent sur ta page publique et aident pour l\'itinéraire.</string>
+    <string name="vendor_onboarding_location_slide1_title">Repère local</string>
+    <string name="vendor_onboarding_location_slide1_body">Marché, école, carrefour — le langage de Lomé.</string>
+    <string name="vendor_onboarding_location_slide2_title">Moins de ratés</string>
+    <string name="vendor_onboarding_location_slide2_body">Un bon indice = moins d\'appels « où tu es ? ».</string>
+    <string name="vendor_onboarding_location_slide3_title">Visibilité quartier</string>
+    <string name="vendor_onboarding_location_slide3_body">Tu apparais près des gourmands de ta zone.</string>
+
+    <string name="vendor_onboarding_schedule_title">Tes horaires</string>
+    <string name="vendor_onboarding_schedule_subtitle">Quand es-tu ouvert ? Les clients voient « Ouvert » ou « Fermé » en direct.</string>
+    <string name="vendor_onboarding_schedule_tip">Tu pourras ajuster ou forcer Ouvert/Fermé plus tard depuis ta boutique.</string>
+    <string name="vendor_onboarding_preset_label">Presets rapides</string>
+    <string name="vendor_onboarding_preset_mon_sat">Lun–Sam 8h–20h</string>
+    <string name="vendor_onboarding_preset_everyday">Tous les jours</string>
+    <string name="vendor_onboarding_preset_lunch">Midi &amp; soir (sauf dim.)</string>
+    <string name="vendor_onboarding_hours_label">Créneau principal</string>
+    <string name="vendor_onboarding_days_label">Jours d\'ouverture</string>
+    <string name="error_schedule_days">Ouvre au moins un jour de la semaine</string>
+    <string name="vendor_onboarding_schedule_slide1_title">Statut en direct</string>
+    <string name="vendor_onboarding_schedule_slide1_body">Ouvert / Fermé s\'affiche sur ta page et tes plats.</string>
+    <string name="vendor_onboarding_schedule_slide2_title">Preset express</string>
+    <string name="vendor_onboarding_schedule_slide2_body">Un tap pour caler une semaine type street-food.</string>
+    <string name="vendor_onboarding_schedule_slide3_title">Tu restes maître</string>
+    <string name="vendor_onboarding_schedule_slide3_body">Override manuel possible à tout moment depuis Ma boutique.</string>
+
+    <string name="vendor_onboarding_review_title">Prêt à briller ?</string>
+    <string name="vendor_onboarding_review_subtitle">Ta boutique est presque en ligne. Vérifie, inspire-toi, puis lance-toi.</string>
+    <string name="vendor_onboarding_review_tip">Après le lancement, tu ajouteras tes préparations et géreras ta visibilité depuis Ma boutique.</string>
+    <string name="vendor_onboarding_review_account">Compte</string>
+    <string name="vendor_onboarding_review_shop">Boutique</string>
+    <string name="vendor_onboarding_review_location">Localisation</string>
+    <string name="vendor_onboarding_review_preview_badge">Aperçu public</string>
+    <string name="vendor_onboarding_review_next_title">Et après le lancement ?</string>
+    <string name="vendor_onboarding_review_slide1_title">Ajoute tes plats</string>
+    <string name="vendor_onboarding_review_slide1_body">Photos emoji + portions FCFA — tu apparais dans la découverte.</string>
+    <string name="vendor_onboarding_review_slide2_title">Ouvre quand tu veux</string>
+    <string name="vendor_onboarding_review_slide2_body">Un switch et les clients voient que tu es dispo.</string>
+    <string name="vendor_onboarding_review_slide3_title">Commandes WhatsApp</string>
+    <string name="vendor_onboarding_review_slide3_body">Ils te contactent direct. Pas de panier, pas de commission opaque.</string>
+    <string name="vendor_onboarding_review_slide4_title">Tu fais partie de Lomé</string>
+    <string name="vendor_onboarding_review_slide4_body">Street-food locale, visible, digne — c\'est TogoFood.</string>
+    <string name="vendor_onboarding_review_summary">Récap rapide</string>
+    <string name="vendor_onboarding_review_ready">Tout est en place. Il ne reste qu\'à lancer.</string>
+    <string name="vendor_onboarding_terms">J\'accepte les conditions vendeur TogoFood et confirme que ces informations sont exactes.</string>
+    <string name="error_shop_desc_short">Décris ta boutique en au moins 10 caractères</string>
+    <string name="error_terms_required">Tu dois accepter les conditions pour continuer</string>
+
+    <string name="vendor_day_mon_short">L</string>
+    <string name="vendor_day_tue_short">M</string>
+    <string name="vendor_day_wed_short">M</string>
+    <string name="vendor_day_thu_short">J</string>
+    <string name="vendor_day_fri_short">V</string>
+    <string name="vendor_day_sat_short">S</string>
+    <string name="vendor_day_sun_short">D</string>
+    
+    <string name="full_name_label">Nom complet</string>
+    <string name="full_name_placeholder">Ama Kossi</string>
+    <string name="phone_whatsapp_label">Numéro Téléphone / WhatsApp professionnel</string>
+    <string name="neighborhood_label">Quartier à Lomé</string>
+    <string name="neighborhood_placeholder">Kodjoviakopé, Hedzranawoé...</string>
+    
+    <string name="terms_accept">J\'accepte les conditions d\'utilisation</string>
+    <string name="create_account_button">Créer mon compte</string>
+    <string name="continue_to_shop_button">Continuer vers ma boutique</string>
+    <string name="finalize_registration_button">Finaliser mon inscription</string>
+    
+    <string name="shop_name_label">Nom de la boutique</string>
+    <string name="shop_name_placeholder">Ex: Maquis Chez Ama</string>
+    <string name="category_label">Catégorie</string>
+    <string name="category_placeholder">Ex: Street food, Pâtisserie…</string>
+    <string name="shop_address_label">Adresse / Quartier</string>
+    <string name="shop_address_placeholder">Kodjoviakopé, Lomé</string>
+
+    <!-- OTP -->
+    <string name="otp_title">Vérification du numéro</string>
+    <string name="otp_subtitle">Saisissez le code envoyé au</string>
+    <string name="resend_code_in">Renvoyer le code dans </string>
+    <string name="resend_code_button">Renvoyer le code</string>
+    <string name="confirm_button">Confirmer</string>
+    
+    <!-- Home / Main -->
+    <string name="home_location_placeholder">Tokoin, Lomé, Togo</string>
+    <string name="home_search_placeholder">Riz, fufu, Tokoin, vendeur…</string>
+    <string name="home_section_popular">Les plus populaires</string>
+    <string name="home_section_nearby">Près de toi</string>
+    <string name="home_see_all">Tout  →</string>
+    <string name="home_promo_label">Dispo maintenant près de toi</string>
+    <string name="home_filter_nearby">À deux pas</string>
+    <string name="home_filter_popular">Populaire</string>
+    <string name="home_filter_available">Chaud</string>
+    <string name="home_filter_open">Ouvert</string>
+    <string name="home_filter_rating">4★+</string>
+    <string name="home_filter_price">Prix</string>
+    <string name="home_filter_with_count">%1$s · %2$d</string>
+    <string name="home_results_none">Aucun résultat</string>
+    <string name="home_results_one">1 résultat</string>
+    <string name="home_results_many">%1$d résultats</string>
+    <string name="home_reset_filters">Réinitialiser</string>
+    <string name="home_empty_title">Rien ne correspond pour l\'instant</string>
+    <string name="home_empty_subtitle">Essaie d\'enlever un filtre ou de changer de catégorie.</string>
+    <string name="home_price_sheet_title">Budget</string>
+    <string name="home_price_sheet_subtitle">Choisis une fourchette — vois combien restent</string>
+    <string name="home_price_any">Tous les prix</string>
+    <string name="home_price_lt_500">Moins de 500 F</string>
+    <string name="home_price_500_1500">500 – 1 500 F</string>
+    <string name="home_price_1500_3000">1 500 – 3 000 F</string>
+    <string name="home_price_3000_5000">3 000 – 5 000 F</string>
+    <string name="home_price_gt_5000">Plus de 5 000 F</string>
+    <string name="home_price_cta">Voir %1$d résultats</string>
+    <string name="card_price_from">Prix dès %1$s FCFA</string>
+    <string name="card_price_from_short">Dès %1$s F</string>
+    <string name="card_distance_at">À %1$s</string>
+    <string name="card_location_zone">Zone %1$s</string>
+    <string name="card_rating_summary">%1$s · %2$s avis</string>
+    <string name="card_unavailable">Indisponible</string>
+    <string name="cd_add_favorite">Ajouter aux favoris</string>
+    <string name="cd_remove_favorite">Retirer des favoris</string>
+    <string name="cd_close">Fermer</string>
+    <string name="cd_search">Rechercher</string>
+    <string name="cd_location">Localisation</string>
+
+    <!-- Map -->
+    <string name="map_title_lome">Carte — Lomé</string>
+
+    <!-- Profile -->
+    <string name="profile_guest_name">Invité</string>
+    <string name="profile_guest_subtitle">Connecte-toi pour synchroniser tes favoris et avis</string>
+    <string name="profile_login">Se connecter</string>
+    <string name="profile_logout">Se déconnecter</string>
+    <string name="profile_section_discovery">Découverte</string>
+    <string name="profile_section_vendor">Vendeur</string>
+    <string name="profile_favorites">Favoris</string>
+    <string name="profile_my_shop">Ma boutique</string>
+    <string name="profile_vendor_subtitle">Gère ta visibilité et tes préparations</string>
+    <string name="profile_version">TogoFood v1.0 — Découverte locale</string>
+
+    <!-- Seller hub -->
+    <string name="seller_hub_title">Ma boutique</string>
+    <string name="seller_hub_missing">Aucune boutique associée à ce compte</string>
+    <string name="seller_hub_open">Ouvert</string>
+    <string name="seller_hub_closed">Fermé</string>
+    <string name="seller_hub_open_hint">Les clients voient ton statut en temps réel</string>
+    <string name="seller_hub_open_hint_closed">Boutique masquée côté découverte tant que tu es fermé</string>
+    <string name="seller_hub_preps_title">Mes préparations</string>
+    <string name="seller_hub_preps_count">%1$d préparations</string>
+    <string name="seller_hub_preps_empty">Aucune préparation pour l\'instant</string>
+    <string name="seller_hub_preps_empty_hint">Ajoute ton premier plat pour apparaître dans la découverte</string>
+    <string name="seller_hub_edit_profile">Profil</string>
+    <string name="seller_hub_schedule">Horaires</string>
+    <string name="seller_hub_add_prep">Ajouter</string>
+    <string name="seller_hub_view_public">Page publique</string>
+    <string name="seller_hub_actions">Raccourcis</string>
+    <string name="seller_hub_stat_preps">Plats</string>
+    <string name="seller_hub_stat_available">Dispo</string>
+    <string name="seller_hub_stat_reviews">Avis</string>
+    <string name="seller_hub_about_title">À propos</string>
+    <string name="seller_hub_location_title">Localisation</string>
+    <string name="seller_hub_hours_today">Aujourd\'hui</string>
+    <string name="seller_hub_prep_available">En vente</string>
+    <string name="seller_hub_prep_paused">En pause</string>
+    <string name="seller_hub_prep_tap_edit">Touche une carte pour modifier</string>
+    <string name="seller_hub_desc_empty">Ajoute une description pour rassurer les clients</string>
+    <string name="seller_hub_hours_line">Aujourd\'hui · %1$s</string>
+    <string name="seller_hub_preps_shown">%1$d sur %2$d préparations</string>
+    <string name="seller_hub_filter_all">Tout · %1$d</string>
+    <string name="seller_hub_filter_available">En vente · %1$d</string>
+    <string name="seller_hub_filter_unavailable">En pause · %1$d</string>
+    <string name="seller_hub_filter_empty">Aucun plat dans ce filtre</string>
+    <string name="seller_hub_filter_empty_cta">Voir tous les plats</string>
+    <string name="seller_hub_empty_stock_title">Ouvert sans plat en vente</string>
+    <string name="seller_hub_empty_stock_body">Les clients voient ta boutique ouverte mais aucun plat. Remets au moins un plat en vente.</string>
+    <string name="seller_hub_empty_stock_cta">Voir les plats en pause · %1$d</string>
+    <string name="seller_hub_layout_list">Liste</string>
+    <string name="seller_hub_layout_grid">Cartes</string>
+
+    <!-- Seller profile edit -->
+    <string name="seller_profile_edit_title">Profil boutique</string>
+    <string name="seller_profile_desc_label">Description</string>
+    <string name="seller_profile_desc_placeholder">Ex: Plats locaux frais chaque jour</string>
+    <string name="seller_profile_zone_label">Zone / Quartier</string>
+    <string name="seller_profile_zone_placeholder">Tokoin, Bè, Agoè…</string>
+    <string name="seller_profile_landmark_label">Repère</string>
+    <string name="seller_profile_landmark_placeholder">Près du marché Assiyéyé</string>
+    <string name="seller_profile_save">Enregistrer</string>
+    <string name="seller_profile_saved">Profil mis à jour</string>
+    <string name="error_shop_name_required">Le nom de la boutique est requis</string>
+
+    <!-- Seller prep edit -->
+    <string name="seller_prep_edit_title_new">Nouvelle préparation</string>
+    <string name="seller_prep_edit_title_edit">Modifier la préparation</string>
+    <string name="seller_prep_name_label">Nom du plat</string>
+    <string name="seller_prep_name_placeholder">Ex: Riz sauce arachide</string>
+    <string name="seller_prep_desc_label">Description</string>
+    <string name="seller_prep_desc_placeholder">Ingrédients, accompagnements…</string>
+    <string name="seller_prep_category_label">Catégorie</string>
+    <string name="seller_prep_popular_label">Mettre en avant (populaire)</string>
+    <string name="seller_prep_available_label">Disponible à la vente</string>
+    <string name="seller_prep_variants_title">Portions / variantes</string>
+    <string name="seller_prep_variant_label">Libellé</string>
+    <string name="seller_prep_variant_label_ph">Ex: Petite portion</string>
+    <string name="seller_prep_variant_price">Prix (FCFA)</string>
+    <string name="seller_prep_variant_price_ph">1500</string>
+    <string name="seller_prep_add_variant">Ajouter une variante</string>
+    <string name="seller_prep_remove_variant">Supprimer</string>
+    <string name="seller_prep_save">Enregistrer</string>
+    <string name="seller_prep_saved">Préparation enregistrée</string>
+    <string name="seller_prep_delete">Supprimer la préparation</string>
+    <string name="seller_prep_delete_confirm_title">Supprimer ?</string>
+    <string name="seller_prep_delete_confirm_message">Ce plat disparaîtra du catalogue et de ta page publique.</string>
+    <string name="seller_prep_delete_confirm">Supprimer</string>
+    <string name="seller_prep_delete_cancel">Annuler</string>
+    <string name="seller_prep_deleted">Préparation supprimée</string>
+    <string name="seller_prep_photo_hint">Photo : icône de catégorie (upload bientôt)</string>
+    <string name="error_prep_name_required">Le nom du plat est requis</string>
+    <string name="error_variant_required">Ajoute au moins une variante</string>
+    <string name="error_variant_price">Chaque variante doit avoir un prix &gt; 0</string>
+    <string name="error_variant_label">Chaque variante doit avoir un libellé</string>
+
+    <!-- Seller schedule -->
+    <string name="seller_schedule_title">Horaires d\'ouverture</string>
+    <string name="seller_schedule_hint">Le toggle Ouvert/Fermé du hub reste prioritaire si tu le changes manuellement.</string>
+    <string name="seller_schedule_closed_day">Fermé</string>
+    <string name="seller_schedule_open_day">Ouvert</string>
+    <string name="seller_schedule_slot">%1$dh – %2$dh</string>
+    <string name="seller_schedule_add_slot">Ajouter un créneau</string>
+    <string name="seller_schedule_remove_slot">Retirer</string>
+    <string name="seller_schedule_open_hour">Ouverture</string>
+    <string name="seller_schedule_close_hour">Fermeture</string>
+    <string name="seller_schedule_save">Enregistrer les horaires</string>
+    <string name="seller_schedule_saved">Horaires enregistrés</string>
+    <string name="seller_schedule_day_sun">Dimanche</string>
+    <string name="seller_schedule_day_mon">Lundi</string>
+    <string name="seller_schedule_day_tue">Mardi</string>
+    <string name="seller_schedule_day_wed">Mercredi</string>
+    <string name="seller_schedule_day_thu">Jeudi</string>
+    <string name="seller_schedule_day_fri">Vendredi</string>
+    <string name="seller_schedule_day_sat">Samedi</string>
+    <string name="seller_detail_hours_title">Horaires</string>
+    <string name="seller_detail_hours_empty">Horaires non renseignés</string>
+    <string name="action_cancel">Annuler</string>
+    <string name="action_confirm">Confirmer</string>
+
+    <!-- Favorites -->
+    <string name="favorites_title">Mes coups de cœur</string>
+    <string name="favorites_subtitle">Tes assiettes et spots pinés à Lomé — prêts quand la faim tape.</string>
+    <string name="favorites_summary">%1$d assiettes · %2$d spots</string>
+    <string name="favorites_summary_open">%1$d assiettes · %2$d spots · %3$d ouverts</string>
+    <string name="favorites_tab_assiettes">Assiettes</string>
+    <string name="favorites_tab_spots">Spots</string>
+    <string name="favorites_filter_all">Tout</string>
+    <string name="favorites_filter_hot">Chaud maintenant</string>
+    <string name="favorites_filter_nearby">À deux pas</string>
+    <string name="favorites_filter_empty_title">Rien sur ce filtre</string>
+    <string name="favorites_filter_empty_subtitle">Tes coups de cœur sont ailleurs — change de filtre ou reviens plus tard.</string>
+    <string name="favorites_empty_title">Rien piné pour l\'instant</string>
+    <string name="favorites_empty_subtitle">Touche le cœur d\'une assiette ou d\'un spot pour le retrouver ici.</string>
+    <string name="favorites_empty_assiettes_title">Aucune assiette encore</string>
+    <string name="favorites_empty_assiettes_subtitle">Sur la découverte, pin un plat qui te fait saliver.</string>
+    <string name="favorites_empty_spots_title">Aucun spot encore</string>
+    <string name="favorites_empty_spots_subtitle">Sur une boutique, touche le cœur pour la garder sous la main.</string>
+    <string name="favorites_spot_meta">%1$s · %2$s</string>
+    <string name="favorites_discover">Découvrir</string>
+    <string name="cd_favorite">Retirer des favoris</string>
+
+    <!-- Seller detail -->
+    <string name="seller_loading">Chargement du vendeur…</string>
+    <string name="seller_not_found">Vendeur introuvable</string>
+    <string name="seller_pro_badge">Vendeur Pro</string>
+    <string name="seller_verified">Vendeur vérifié</string>
+    <string name="seller_open">Ouvert</string>
+    <string name="seller_closed">Fermé</string>
+    <string name="seller_opening_soon">Bientôt</string>
+    <string name="seller_unavailable">Indisponible</string>
+    <string name="seller_itinerary">Itinéraire</string>
+    <string name="seller_call">Appeler</string>
+    <string name="seller_menu_title">Le menu</string>
+    <string name="seller_about_title">À propos</string>
+    <string name="seller_popular_title">Populaire chez ce vendeur</string>
+    <string name="seller_tab_menu">Menu</string>
+    <string name="seller_tab_popular">Populaire</string>
+    <string name="seller_tab_empty">Aucune préparation ici</string>
+    <string name="search_tab_preparations">Préparations</string>
+    <string name="search_tab_sellers">Vendeurs</string>
+    <string name="search_prep_seller_meta">%1$s · %2$s</string>
+    <string name="search_price_from_prefix">Dès</string>
+    <string name="search_price_value">%1$s F</string>
+    <string name="search_seller_location">%1$s · %2$s · %3$s</string>
+    <string name="search_placeholder">Riz, fufu, Tokoin, vendeur…</string>
+    <string name="search_clear">Effacer la recherche</string>
+    <string name="search_discover_title">Découvrir</string>
+    <string name="search_filter_open">Ouvert</string>
+    <string name="search_filter_popular">Populaire</string>
+    <string name="search_filter_nearby">À - de 1 km</string>
+    <string name="search_filter_with_count">%1$s · %2$d</string>
+    <string name="search_filter_more">Filtres</string>
+    <string name="search_filters_cd">Filtres avancés</string>
+    <string name="search_filters_title">Affiner la recherche</string>
+    <string name="search_filters_subtitle">Prix et note — vois combien restent avant d\'appliquer</string>
+    <string name="search_filters_price_section">Budget max</string>
+    <string name="search_filters_rating_section">Note minimum</string>
+    <string name="search_price_any">Tous les prix</string>
+    <string name="search_price_up_to">≤ %1$d F</string>
+    <string name="search_rating_any">Toutes</string>
+    <string name="search_rating_4_plus">4,0+</string>
+    <string name="search_rating_45_plus">4,5+</string>
+    <string name="search_filters_cta">Voir %1$d résultats</string>
+    <string name="search_empty_preparations">Aucune préparation</string>
+    <string name="search_empty_sellers">Aucun vendeur</string>
+    <string name="search_reset_filters">Réinitialiser les filtres</string>
+    <string name="seller_zone_landmark">%1$s · %2$s</string>
+    <string name="seller_rating_reviews">%1$.1f (%2$d avis)</string>
+    <string name="seller_share_text">Découvre le vendeur %1$s sur TogoFood !</string>
+    <string name="seller_share_via">Partager via</string>
+    <string name="seller_phone_unavailable">Numéro indisponible</string>
+    <string name="seller_call_failed">Impossible d\'ouvrir l\'appel</string>
+    <string name="seller_maps_failed">Aucune app carte trouvée</string>
+    <string name="cd_back">Retour</string>
+    <string name="cd_share">Partager</string>
+    <string name="cd_favorite_seller">Ajouter le vendeur aux favoris</string>
+    <string name="cd_unfavorite_seller">Retirer le vendeur des favoris</string>
+
+    <!-- Prep detail -->
+
+    <!-- Search -->
+    <string name="search_recent_title">Recherches récentes</string>
+    <string name="prep_seller_section">Vendeur</string>
+    <string name="search_emoji_restaurant">🍽️</string>
+    <string name="search_emoji_shop">🏪</string>
+    <string name="search_emoji_check">✓</string>
+    <string name="search_emoji_category_placeholder">🍴</string>
+    <string name="search_error_title">Erreur de chargement</string>
+    <string name="search_error_retry">Réessayer</string>
+</resources>
