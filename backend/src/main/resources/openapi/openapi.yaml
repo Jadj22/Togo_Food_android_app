@@ -1,0 +1,117 @@
+openapi: 3.0.3
+info:
+  title: TogoFood API
+  version: "1.0.0"
+  description: >-
+    API REST du catalogue TogoFood. Les endpoints métier sont versionnés sous
+    /api/v1. Toute erreur est renvoyée au format {code, message, requestId, details?}.
+servers:
+  - url: /
+    description: Serveur local
+tags:
+  - name: System
+    description: Informations de service et sondes de santé
+paths:
+  /api/v1:
+    get:
+      tags:
+        - System
+      summary: Informations de service
+      operationId: getServiceInfo
+      responses:
+        "200":
+          description: Informations de service
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceInfo"
+  /health/live:
+    get:
+      tags:
+        - System
+      summary: Sonde de liveness
+      description: Indique que le processus répond.
+      operationId: getLiveness
+      responses:
+        "200":
+          description: Le processus répond
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /health/ready:
+    get:
+      tags:
+        - System
+      summary: Sonde de readiness
+      description: Répond 200 seulement si PostgreSQL accepte une requête SELECT 1.
+      operationId: getReadiness
+      responses:
+        "200":
+          description: La base de données répond
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+        "503":
+          description: Base de données indisponible
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+components:
+  schemas:
+    ServiceInfo:
+      type: object
+      required:
+        - name
+        - version
+      properties:
+        name:
+          type: string
+          example: TogoFood API
+        version:
+          type: string
+          example: v1
+    HealthStatus:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum:
+            - ok
+            - not_ready
+    ApiError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          example: NOT_FOUND
+        message:
+          type: string
+          example: Ressource introuvable.
+        requestId:
+          type: string
+          nullable: true
+        details:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/FieldError"
+    FieldError:
+      type: object
+      required:
+        - field
+        - reason
+      properties:
+        field:
+          type: string
+          example: zoneId
+        reason:
+          type: string
+          example: invalid_format
