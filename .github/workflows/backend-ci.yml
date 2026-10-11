@@ -41,6 +41,27 @@ jobs:
       - name: Build and test (PostgreSQL via Testcontainers)
         run: ./gradlew -p backend build --no-daemon --stacktrace
 
+      - name: Fail if any test was skipped
+        run: |
+          total=0
+          skipped=0
+          for f in backend/build/test-results/test/*.xml; do
+            [ -e "$f" ] || continue
+            n=$(grep -oE 'tests="[0-9]+"' "$f" | head -1 | tr -dc '0-9')
+            s=$(grep -oE 'skipped="[0-9]+"' "$f" | head -1 | tr -dc '0-9')
+            total=$((total + ${n:-0}))
+            skipped=$((skipped + ${s:-0}))
+          done
+          echo "Executed tests: $total (skipped: $skipped)"
+          if [ "$total" -lt 1 ]; then
+            echo "::error::No test was executed"
+            exit 1
+          fi
+          if [ "$skipped" -ne 0 ]; then
+            echo "::error::$skipped test(s) skipped: integration tests must run (is Docker available?)"
+            exit 1
+          fi
+
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4
